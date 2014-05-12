@@ -113,6 +113,8 @@ public class SocialNetwork {
 	 * 
 	 */
 	public void addMember(String pseudo, String password, String profil) throws BadEntry, MemberAlreadyExists  {
+		
+		if (authenticate(pseudo, password)) throw new MemberAlreadyExists();
 
 	}
 
@@ -340,10 +342,6 @@ public class SocialNetwork {
 		}
 		
 		return false;
-<<<<<<< HEAD
-	
-=======
->>>>>>> 9b8bd6355ff4505ef7bb22cc3348197ff4ded1bf
 	}
 
 }
