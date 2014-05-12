@@ -272,27 +272,55 @@ public class SocialNetwork {
 
 	
 	/**
-	 * Permet de vérifier que le pseudo est d'une longueur supérieure à 1 
+	 * Permet de vérifier que le pseudo est bien instancié et d'une longueur supérieure à 1 
+	 * @param pseudo pseudo du membre
+	 * 
+	 * @return boolean renvoie 
 	 */
 	
 	public boolean badPseudoEntry(String pseudo){
 		
+		if(pseudo == null)return true;
+		
 		pseudo = pseudo.trim();
 		if(pseudo.length() < 1)return true;
 		else return false;
-		
 	}
 
 	/**
-	 * Permet de vérifier que le password est d'une longueur supérieure à 3 
+	 * Permet de vérifier que le password est bien instancié et d'une longueur supérieure à 3 
 	 */
 	
 	public boolean badPasswordEntry(String password){
 		
+		if(password == null)return true;
+		
 		password = password.trim();
 		if(password.length() < 4)return true;
-		else return false;
+		else return false;	
+	}
+	
+	/**
+	 * Permet de vérifier que le titre est bien instancié et d'une longueur supérieure à 1 
+	 */
+	
+	public boolean badTitleEntry(String title){
 		
+		if(title == null)return true;
+		
+		title = title.trim();
+		if(title.length() < 1)return true;
+		else return false;
+	}
+	
+	/**
+	 * Permet de vérifier que le commentaire est bien instancié
+	 */
+	
+	public boolean badCommentaryEntry(String commentary){
+		
+		if(commentary == null)return true;
+		else return false;
 	}
 	
 	/** 
@@ -312,7 +340,10 @@ public class SocialNetwork {
 		}
 		
 		return false;
+<<<<<<< HEAD
 	
+=======
+>>>>>>> 9b8bd6355ff4505ef7bb22cc3348197ff4ded1bf
 	}
 
 }
