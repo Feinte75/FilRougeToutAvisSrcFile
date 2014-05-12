@@ -144,6 +144,8 @@ public class SocialNetwork {
 	 */
 	public void addItemFilm(String pseudo, String password, String titre, String genre, String realisateur, String scenariste, int duree) throws BadEntry, NotMember, ItemFilmAlreadyExists {
 
+		if (!authenticate(pseudo, password)) throw new NotMember("");
+		
 	}
 
 	/**
@@ -172,6 +174,8 @@ public class SocialNetwork {
 	 */
 	public void addItemBook(String pseudo, String password, String titre, String genre, String auteur, int nbPages) throws  BadEntry, NotMember, ItemBookAlreadyExists{
 
+		if (!authenticate(pseudo, password)) throw new NotMember("");
+		
 	}
 
 	/**
@@ -216,6 +220,9 @@ public class SocialNetwork {
 	 * @return la note moyenne des notes sur ce film  
 	 */
 	public float reviewItemFilm(String pseudo, String password, String titre, float note, String commentaire) throws BadEntry, NotMember, NotItem {
+		
+		if (!authenticate(pseudo, password)) throw new NotMember("");
+		
 		return 0.0f;
 	}
 
@@ -246,6 +253,10 @@ public class SocialNetwork {
 	 * @return la note moyenne des notes sur ce livre
 	 */
 	public float reviewItemBook(String pseudo, String password, String titre, float note, String commentaire) throws BadEntry, NotMember, NotItem {
+		
+		if (!authenticate(pseudo, password)) throw new NotMember("");
+		
+		
 		return 0.0f;
 	}
 
@@ -300,10 +311,8 @@ public class SocialNetwork {
 			if(m.userExists(pseudo, password)) return true;
 		}
 		
-		
-		
 		return false;
-		
+	
 	}
 
 }
