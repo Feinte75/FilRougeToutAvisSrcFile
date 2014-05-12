@@ -115,6 +115,8 @@ public class SocialNetwork {
 	public void addMember(String pseudo, String password, String profil) throws BadEntry, MemberAlreadyExists  {
 		
 		if (authenticate(pseudo, password)) throw new MemberAlreadyExists();
+		if (badPseudoEntry(pseudo)) throw new BadEntry("");
+		if (badPasswordEntry(password)) throw new BadEntry("");
 
 	}
 
@@ -147,6 +149,9 @@ public class SocialNetwork {
 	public void addItemFilm(String pseudo, String password, String titre, String genre, String realisateur, String scenariste, int duree) throws BadEntry, NotMember, ItemFilmAlreadyExists {
 
 		if (!authenticate(pseudo, password)) throw new NotMember("");
+		if (badPseudoEntry(pseudo)) throw new BadEntry("");
+		if (badPasswordEntry(password)) throw new BadEntry("");
+		if (badTitleEntry(titre)) throw new BadEntry("");
 		
 	}
 
@@ -177,6 +182,9 @@ public class SocialNetwork {
 	public void addItemBook(String pseudo, String password, String titre, String genre, String auteur, int nbPages) throws  BadEntry, NotMember, ItemBookAlreadyExists{
 
 		if (!authenticate(pseudo, password)) throw new NotMember("");
+		if (badPseudoEntry(pseudo)) throw new BadEntry("");
+		if (badPasswordEntry(password)) throw new BadEntry("");
+		if (badTitleEntry(titre)) throw new BadEntry("");
 		
 	}
 
@@ -224,6 +232,10 @@ public class SocialNetwork {
 	public float reviewItemFilm(String pseudo, String password, String titre, float note, String commentaire) throws BadEntry, NotMember, NotItem {
 		
 		if (!authenticate(pseudo, password)) throw new NotMember("");
+		if (badPseudoEntry(pseudo)) throw new BadEntry("");
+		if (badPasswordEntry(password)) throw new BadEntry("");
+		if (badTitleEntry(titre)) throw new BadEntry("");
+		if (badCommentaryEntry(commentaire)) throw new BadEntry("");
 		
 		return 0.0f;
 	}
@@ -257,6 +269,10 @@ public class SocialNetwork {
 	public float reviewItemBook(String pseudo, String password, String titre, float note, String commentaire) throws BadEntry, NotMember, NotItem {
 		
 		if (!authenticate(pseudo, password)) throw new NotMember("");
+		if (badPseudoEntry(pseudo)) throw new BadEntry("");
+		if (badPasswordEntry(password)) throw new BadEntry("");
+		if (badTitleEntry(titre)) throw new BadEntry("");
+		if (badCommentaryEntry(commentaire)) throw new BadEntry("");
 		
 		
 		return 0.0f;
