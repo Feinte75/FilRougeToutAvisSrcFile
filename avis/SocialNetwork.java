@@ -50,7 +50,7 @@ public class SocialNetwork {
 	 * @uml.property name="members"
 	 * @uml.associationEnd multiplicity="(0 -1)" inverse="socialNetwork:avis.Member"
 	 */
-	private Collection<Member> members;
+	private LinkedList<Member> members;
 	/** 
 	 * @uml.property name="items"
 	 * @uml.associationEnd multiplicity="(0 -1)" aggregation="composite" inverse="socialNetwork:avis.Item"
@@ -258,5 +258,24 @@ public class SocialNetwork {
 		return "";
 	}
 
+	/** 
+	 * Permet d'authentifier un utilisateur lorsque celui ci rentre son pseudo/motdepasse.
+	 * 
+	 * @param pseudo pseudo du membre
+	 * @param password son mot de passe
+	 * 
+	 * @return boolean renvoie true ou false en fonction de l'existence du couple pseudo/password dans la base de donnée Social Network
+	 * 
+	 */
+	
+	public boolean authenticate(String pseudo, String password){
+		
+		for (Member m : members){
+			if(m.equals(pseudo, password)) return true;
+		}
+		
+		return false;
+		
+	}
 
 }
