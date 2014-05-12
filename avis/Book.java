@@ -13,7 +13,7 @@ public class Book extends Item {
 	private int nbPages;
 		
 	/**
-	 * test 5
+	 * test 8
 	*/
 	public static void main(String[] args){
 		
