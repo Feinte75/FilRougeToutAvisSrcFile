@@ -31,10 +31,12 @@ public class Member {
 	/**
 	*/
 	
-	public boolean equals(String pseudo, String password){
+	public boolean userExists(String pseudo, String password){
 		if(this.pseudo.equals(pseudo) && this.password.equals(password)) return true;
 		else return false;
 	}
+	
+	
 	
 	public static void main(String[] args){
 		

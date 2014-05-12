@@ -272,8 +272,10 @@ public class SocialNetwork {
 	public boolean authenticate(String pseudo, String password){
 		
 		for (Member m : members){
-			if(m.equals(pseudo, password)) return true;
+			if(m.userExists(pseudo, password)) return true;
 		}
+		
+		
 		
 		return false;
 		
