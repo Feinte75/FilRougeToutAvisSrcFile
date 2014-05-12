@@ -27,13 +27,10 @@ public class Review {
 	public static void main(String[] args){
 		
 	}
-
-		
 		
 	public Review(Member member, Item item, String commentary, float rating){
 		
 	}
-
 
 	public float getRating() {
 		// TODO Auto-generated method stub

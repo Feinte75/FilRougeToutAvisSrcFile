@@ -17,7 +17,6 @@ public class Film extends Item {
 	private int length;
 		
 	/**
-	 * test = 10
 	*/
 	public static void main(String[] main){
 		

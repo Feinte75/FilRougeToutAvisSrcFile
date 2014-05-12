@@ -18,6 +18,7 @@ public abstract class Item {
 	 * @uml.associationEnd multiplicity="(0 -1)" inverse="item:avis.Review"
 	 */
 	private LinkedList<Review> reviews;
+	
 	public float addReview(Review review){
 		reviews.add(review);
 		return average();

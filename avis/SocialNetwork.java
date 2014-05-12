@@ -72,6 +72,7 @@ public class SocialNetwork {
 	 * @return le nombre de membres
 	 */
 	public int nbMembers() {
+		
 		return 0;
 	}
 
