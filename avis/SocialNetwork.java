@@ -259,6 +259,31 @@ public class SocialNetwork {
 		return "";
 	}
 
+	
+	/**
+	 * Permet de vérifier que le pseudo est d'une longueur supérieure à 1 
+	 */
+	
+	public boolean badPseudoEntry(String pseudo){
+		
+		pseudo = pseudo.trim();
+		if(pseudo.length() < 1)return true;
+		else return false;
+		
+	}
+
+	/**
+	 * Permet de vérifier que le password est d'une longueur supérieure à 3 
+	 */
+	
+	public boolean badPasswordEntry(String password){
+		
+		password = password.trim();
+		if(password.length() < 4)return true;
+		else return false;
+		
+	}
+	
 	/** 
 	 * Permet d'authentifier un utilisateur lorsque celui ci rentre son pseudo/motdepasse.
 	 * 
