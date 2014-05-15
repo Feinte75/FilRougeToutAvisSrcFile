@@ -18,7 +18,6 @@ public class TestsReviewItemFilm {
 			nbTestFail++;
 		}
 		catch (BadEntry e) {
-			System.out.println("Test " + idTest + " : " + messErreur);
 			nbTestOk++;
 		}
 		catch (Exception e) {
@@ -35,7 +34,6 @@ public class TestsReviewItemFilm {
 			nbTestFail++;
 		}
 		catch (NotMember e){
-			System.out.println("Test " + idTest + " : " + messErreur);
 			nbTestOk++;
 		}
 		catch (Exception e){
@@ -68,7 +66,6 @@ public class TestsReviewItemFilm {
 			nbTestFail++;
 		}
 		catch (NotItem e) {
-			System.out.println("Test " + idTest + " ; " + messErreur );
 			nbTestOk++;
 		}
 		catch (Exception e) {
@@ -80,6 +77,8 @@ public class TestsReviewItemFilm {
 
 	public static void main(String[] args){
 
+		System.out.println("Tests  ajouter des reviews au reseau social  ");
+		
 		SocialNetwork sn = new SocialNetwork();
 
 		try {

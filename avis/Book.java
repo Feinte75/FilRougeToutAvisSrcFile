@@ -1,5 +1,7 @@
 package avis;
 
+import java.util.LinkedList;
+
 
 public class Book extends Item {
 
@@ -19,11 +21,19 @@ public class Book extends Item {
 		this.nbPages = nbPages;
 	}
 
-	/**
-	 *
-	*/
-	public static void main(String[] args){
+	@Override
+	public LinkedList<String> consultItem(LinkedList<String> ll) {
 		
+		ll.add(title);
+		ll.add(genre);
+		ll.add(author);
+		ll.add(Integer.toString(nbPages));
+		ll.add(Float.toString(super.average()));
+		
+		return ll;
 	}
 
+	public static void main(String[] args){
+
+	}
 }

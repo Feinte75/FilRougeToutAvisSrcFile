@@ -104,7 +104,7 @@ public class SocialNetwork {
 		int nbBooks = 0;
 
 		for(Item i : items){
-			if(i instanceof Film) nbBooks++;
+			if(i instanceof Book) nbBooks++;
 		}
 		return nbBooks;
 	}
@@ -237,8 +237,18 @@ public class SocialNetwork {
 	 * Cette représentation contiendra la note de l'item s'il a été noté.
 	 * (une liste vide si aucun item ne correspond) 
 	 */
-	public LinkedList <String> consultItems(String nom) throws BadEntry {
-		return new LinkedList <String> ();
+	public LinkedList <String> consultItems(String title) throws BadEntry {
+		
+		LinkedList<String> ll = new LinkedList<String>();
+		
+		if(badTitleEntry(title)) throw new BadEntry("");
+		
+		Item item = findItem(title);
+		if(item != null){
+			ll = item.consultItem(ll);
+		}
+		
+		return ll;
 	}
 
 
@@ -272,6 +282,7 @@ public class SocialNetwork {
 		if (badPasswordEntry(password)) throw new BadEntry("");
 		if (badTitleEntry(title)) throw new BadEntry("");
 		if (badCommentaryEntry(commentary)) throw new BadEntry("");
+		if (badRatingEntry(rating)) throw new BadEntry("");
 		
 		Member member = authenticate(pseudo, password);
 		if (member == null) throw new NotMember("");
@@ -283,7 +294,6 @@ public class SocialNetwork {
 		
 		return item.average();
 	}
-
 
 
 	/**
@@ -316,6 +326,7 @@ public class SocialNetwork {
 		if (badPasswordEntry(password)) throw new BadEntry("");
 		if (badTitleEntry(title)) throw new BadEntry("");
 		if (badCommentaryEntry(commentary)) throw new BadEntry("");
+		if (badRatingEntry(rating)) throw new BadEntry("");
 		
 		Member member = authenticate(pseudo, password);
 		if (member == null) throw new NotMember("");
@@ -465,7 +476,4 @@ public class SocialNetwork {
 		
 		return itemFound;
 	}
-
-		
-
 }

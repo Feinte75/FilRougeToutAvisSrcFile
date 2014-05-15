@@ -57,5 +57,7 @@ public abstract class Item {
 		
 		return av;
 	}
+	
+	public abstract LinkedList<String> consultItem(LinkedList<String> ll);
 
 }

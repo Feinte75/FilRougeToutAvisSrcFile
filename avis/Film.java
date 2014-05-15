@@ -1,5 +1,7 @@
 package avis;
 
+import java.util.LinkedList;
+
 
 public class Film extends Item {
 
@@ -28,5 +30,16 @@ public class Film extends Item {
 	public static void main(String[] main){
 		
 	}
-
+	
+	@Override
+	public LinkedList<String> consultItem(LinkedList<String> ll) {
+		
+		ll.add(title);
+		ll.add(genre);
+		ll.add(filmMaker);
+		ll.add(scriptWriter);
+		ll.add(Float.toString(super.average()));
+		
+		return ll;
+	}
 }

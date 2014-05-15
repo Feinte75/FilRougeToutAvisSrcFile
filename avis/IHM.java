@@ -626,13 +626,6 @@ public class IHM {
 		}
 	}
 
-
-
-
-
-
-
-
 	public static void main (String [] args) {
 
 		try {
@@ -646,16 +639,12 @@ public class IHM {
 			sn.addMember("Antoine", "antoine", "grand amoureux de littérature");
 			sn.addMember("Alice", "alice", "23 ans, sexy");
 
-
 		}
 		catch (Exception e) {
 			System.out.println("Exception inattendue : " + e);
 			e.printStackTrace();
 		}
-
 	}
-
-
 }
 
 
