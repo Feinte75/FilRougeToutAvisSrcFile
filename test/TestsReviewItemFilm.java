@@ -47,8 +47,12 @@ public class TestsReviewItemFilm {
 	public static void reviewItemFilmOkTest (SocialNetwork sn, String pseudo, String password, String titre, 
 			float note, String commentaire, String idTest){
 		try{
-			sn.reviewItemFilm(pseudo, password, titre, note, commentaire);
-			nbTestOk++;
+			float average = sn.reviewItemFilm(pseudo, password, titre, note, commentaire);
+			if(average != 0)nbTestOk++;
+			else{
+				System.out.println("Test " + idTest + " :  la moyenne n'a pas été correctement recalculée");
+				nbTestFail++;
+			}
 		}
 		catch (Exception e) {
 			System.out.println ("Test " + idTest + " : exception non prévue. " + e);
@@ -77,7 +81,7 @@ public class TestsReviewItemFilm {
 
 	public static void main(String[] args){
 
-		System.out.println("Tests  ajouter des reviews au reseau social  ");
+		System.out.println("Tests  ajouter des reviews au films du reseau social  ");
 		
 		SocialNetwork sn = new SocialNetwork();
 
