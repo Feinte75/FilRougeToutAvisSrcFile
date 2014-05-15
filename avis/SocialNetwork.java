@@ -56,7 +56,7 @@ public class SocialNetwork {
 	 * @uml.associationEnd multiplicity="(0 -1)" aggregation="composite" inverse="socialNetwork:avis.Item"
 	 */
 	
-	private Collection<Item> items;
+	private LinkedList<Item> items;
 	
 	/**
 	 * constructeur de <i>SocialNetwok</i> 
@@ -73,7 +73,7 @@ public class SocialNetwork {
 	 */
 	public int nbMembers() {
 		
-		return 0;
+		return members.size();
 	}
 
 	/**
@@ -82,6 +82,7 @@ public class SocialNetwork {
 	 * @return le nombre de films
 	 */
 	public int nbFilms() {
+		
 		return 0;
 	}
 
@@ -114,9 +115,11 @@ public class SocialNetwork {
 	 */
 	public void addMember(String pseudo, String password, String profil) throws BadEntry, MemberAlreadyExists  {
 		
-		if (authenticate(pseudo, password)) throw new MemberAlreadyExists();
 		if (badPseudoEntry(pseudo)) throw new BadEntry("");
 		if (badPasswordEntry(password)) throw new BadEntry("");
+		
+		Member member = authenticate(pseudo, password);
+		if (member == null) throw new MemberAlreadyExists();
 
 	}
 
@@ -148,10 +151,12 @@ public class SocialNetwork {
 	 */
 	public void addItemFilm(String pseudo, String password, String titre, String genre, String realisateur, String scenariste, int duree) throws BadEntry, NotMember, ItemFilmAlreadyExists {
 
-		if (!authenticate(pseudo, password)) throw new NotMember("");
 		if (badPseudoEntry(pseudo)) throw new BadEntry("");
 		if (badPasswordEntry(password)) throw new BadEntry("");
 		if (badTitleEntry(titre)) throw new BadEntry("");
+		
+		Member member = authenticate(pseudo, password);
+		if (member == null) throw new NotMember("");
 		
 	}
 
@@ -181,10 +186,12 @@ public class SocialNetwork {
 	 */
 	public void addItemBook(String pseudo, String password, String titre, String genre, String auteur, int nbPages) throws  BadEntry, NotMember, ItemBookAlreadyExists{
 
-		if (!authenticate(pseudo, password)) throw new NotMember("");
 		if (badPseudoEntry(pseudo)) throw new BadEntry("");
 		if (badPasswordEntry(password)) throw new BadEntry("");
 		if (badTitleEntry(titre)) throw new BadEntry("");
+		
+		Member member = authenticate(pseudo, password);
+		if (member == null) throw new NotMember("");
 		
 	}
 
@@ -229,13 +236,15 @@ public class SocialNetwork {
 	 * 
 	 * @return la note moyenne des notes sur ce film  
 	 */
-	public float reviewItemFilm(String pseudo, String password, String titre, float note, String commentaire) throws BadEntry, NotMember, NotItem {
+	public float reviewItemFilm(String pseudo, String password, String title, float rating, String commentary) throws BadEntry, NotMember, NotItem {
 		
-		if (!authenticate(pseudo, password)) throw new NotMember("");
 		if (badPseudoEntry(pseudo)) throw new BadEntry("");
 		if (badPasswordEntry(password)) throw new BadEntry("");
-		if (badTitleEntry(titre)) throw new BadEntry("");
-		if (badCommentaryEntry(commentaire)) throw new BadEntry("");
+		if (badTitleEntry(title)) throw new BadEntry("");
+		if (badCommentaryEntry(commentary)) throw new BadEntry("");
+		
+		Member member = authenticate(pseudo, password);
+		if (member == null) throw new NotMember("");
 		
 		return 0.0f;
 	}
@@ -266,14 +275,19 @@ public class SocialNetwork {
 	 * 
 	 * @return la note moyenne des notes sur ce livre
 	 */
-	public float reviewItemBook(String pseudo, String password, String titre, float note, String commentaire) throws BadEntry, NotMember, NotItem {
+	public float reviewItemBook(String pseudo, String password, String title, float rating, String commentary) throws BadEntry, NotMember, NotItem {
 		
-		if (!authenticate(pseudo, password)) throw new NotMember("");
 		if (badPseudoEntry(pseudo)) throw new BadEntry("");
 		if (badPasswordEntry(password)) throw new BadEntry("");
-		if (badTitleEntry(titre)) throw new BadEntry("");
-		if (badCommentaryEntry(commentaire)) throw new BadEntry("");
+		if (badTitleEntry(title)) throw new BadEntry("");
+		if (badCommentaryEntry(commentary)) throw new BadEntry("");
 		
+		Member member = authenticate(pseudo, password);
+		if (member == null) throw new NotMember("");
+		
+		Item item = findItem(title);
+		Review review = item.addReview(member, commentary, rating);
+		member.addReview(review);
 		
 		return 0.0f;
 	}
@@ -299,9 +313,8 @@ public class SocialNetwork {
 	public boolean badPseudoEntry(String pseudo){
 		
 		if(pseudo == null)return true;
-		
-		pseudo = pseudo.trim();
-		if(pseudo.length() < 1)return true;
+
+		if(pseudo.trim().length() < 1)return true;
 		else return false;
 	}
 
@@ -313,8 +326,7 @@ public class SocialNetwork {
 		
 		if(password == null)return true;
 		
-		password = password.trim();
-		if(password.length() < 4)return true;
+		if(password.trim().length() < 4)return true;
 		else return false;	
 	}
 	
@@ -325,9 +337,8 @@ public class SocialNetwork {
 	public boolean badTitleEntry(String title){
 		
 		if(title == null)return true;
-		
-		title = title.trim();
-		if(title.length() < 1)return true;
+		 
+		if(title.trim().length() < 1)return true;
 		else return false;
 	}
 	
@@ -341,23 +352,39 @@ public class SocialNetwork {
 		else return false;
 	}
 	
+	/**
+	 */
+	public boolean badRatingEntry(float rating){
+		return false;	
+	}
+
 	/** 
 	 * Permet d'authentifier un utilisateur lorsque celui ci rentre son pseudo/motdepasse.
 	 * 
 	 * @param pseudo pseudo du membre
 	 * @param password son mot de passe
 	 * 
-	 * @return boolean renvoie true ou false en fonction de l'existence du couple pseudo/password dans la base de donnée Social Network
+	 * @return Renvoie le membre si il a été trouvé, renvoie null sinon
 	 * 
 	 */
 	
-	public boolean authenticate(String pseudo, String password){
+	public Member authenticate(String pseudo, String password){
+		
+		Member memberFound = null;
 		
 		for (Member m : members){
-			if(m.userExists(pseudo, password)) return true;
+			memberFound = m.userExists(pseudo, password);
 		}
 		
-		return false;
+		return memberFound;
 	}
+
+	
+	public Item findItem(String searchItem){
+		
+		return null;
+	}
+
+		
 
 }

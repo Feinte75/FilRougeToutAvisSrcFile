@@ -1,6 +1,7 @@
 package avis;
 
 import java.util.Collection;
+import java.util.LinkedList;
 
 
 public class Member {
@@ -26,17 +27,19 @@ public class Member {
 	 * @uml.property  name="reviews"
 	 * @uml.associationEnd  multiplicity="(0 -1)" inverse="member:avis.Review"
 	 */
-	private Collection<Review> reviews;
+	private LinkedList<Review> reviews;
 		
 	/**
 	*/
 	
-	public boolean userExists(String pseudo, String password){
-		if(this.pseudo.equals(pseudo) && this.password.equals(password)) return true;
-		else return false;
+	public Member userExists(String pseudo, String password){
+		if(this.pseudo.equals(pseudo) && this.password.equals(password)) return this;
+		else return null;
 	}
 	
-	
+	public void addReview(Review review){
+		
+	}
 	
 	public static void main(String[] args){
 		

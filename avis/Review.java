@@ -29,7 +29,10 @@ public class Review {
 	}
 		
 	public Review(Member member, Item item, String commentary, float rating){
-		
+		this.rating = rating;
+		this.member = member;
+		this.commentary = commentary;
+		this.item = item;
 	}
 
 	public float getRating() {

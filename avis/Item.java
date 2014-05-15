@@ -24,6 +24,14 @@ public abstract class Item {
 		return average();
 	}
 
+	public Review addReview(Member member, String commentary, float rating){
+		
+		Review review = new Review(member, this, commentary, rating);
+		
+		return review;
+		
+	}
+	
 	public float average(){
 		float av = 0;
 		
