@@ -27,24 +27,26 @@ public abstract class Item {
 		reviews = new LinkedList<Review>();
 	}
 
-	public Review addReview(Member member, String commentary, float rating){
+	public void addReview(Review r){
 		
-		Review review = new Review(member, this, commentary, rating);
-		reviews.add(review);
-		return review;
+		reviews.add(r);
 	}
+	
 	
 	/**
 	 * 
-	 * @param title the tile of the item searched
+	 * @param title the title of the item searched
 	 * @return the item if it is found, null either
 	 */
-	
 	public Item itemExists(String title){
 		if(this.title.equalsIgnoreCase(title.trim())) return this;
 		else return null;
 	}
 	
+	/**
+	 * calculate the average rating
+	 * @return the average rating
+	 */
 	public float average(){
 		
 		float av = 0;
@@ -52,12 +54,16 @@ public abstract class Item {
 		for(Review sum : reviews){
 			av += sum.getRating();
 		}
-		
 		av /= reviews.size();
 		
 		return av;
 	}
 	
+	/**
+	 * 
+	 * @param ll the linked list to fill with the item information
+	 * @return the linked list filled or null if no item was found
+	 */
 	public abstract LinkedList<String> consultItem(LinkedList<String> ll);
 
 }

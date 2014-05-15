@@ -32,12 +32,22 @@ public class Review {
 		this.commentary = commentary;
 		this.item = item;
 	}
+	
+	public Review modifyReview(String commentary, float rating){
+		this.commentary = commentary;
+		this.rating = rating;
+		return this;
+	}
 
 	public float getRating(){
 		
 		return rating;
 	}
+	
+	public Item getItem(){
 		
+		return item;
+	}
 	public static void main(String[] args){
 
 	}

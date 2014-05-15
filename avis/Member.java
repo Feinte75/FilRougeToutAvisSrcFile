@@ -1,6 +1,5 @@
 package avis;
 
-import java.util.Collection;
 import java.util.LinkedList;
 
 
@@ -45,8 +44,24 @@ public class Member {
 		else return null;
 	}
 	
-	public void addReview(Review review){
+	public Review addReview(Item item, String commentary, float rating){
 		
+		Review review = reviewAlreadyExists(item);
+		if (review != null) return review.modifyReview(commentary, rating);
+		else{
+			review = new Review(this, item, commentary, rating);
+			item.addReview(review);
+			return review;	
+		}
+	}
+	
+	public Review reviewAlreadyExists(Item item){
+		
+		for(Review r : reviews){
+		
+			if(r.getItem() == item) return r;
+		}
+		return null;
 	}
 	
 	public String toString(){

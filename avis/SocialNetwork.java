@@ -1,16 +1,13 @@
 package avis;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 
-
 import exception.BadEntry;
-import exception.ItemFilmAlreadyExists;
 import exception.ItemBookAlreadyExists;
+import exception.ItemFilmAlreadyExists;
 import exception.MemberAlreadyExists;
 import exception.NotItem;
 import exception.NotMember;
-import java.util.Collection;
 
 /** 
  * @author A. Beugnard, 
@@ -63,6 +60,9 @@ public class SocialNetwork {
 	 * 
 	 */
 
+	/**
+	 * Constructeur
+	 */
 	public SocialNetwork() {
 		
 		members = new LinkedList<Member>();
@@ -178,7 +178,7 @@ public class SocialNetwork {
 		Member member = authenticate(pseudo, password);
 		if (member == null) throw new NotMember("");
 		
-		Item item = findItem(title);
+		Item item = findItemFilm(title);
 		if (item != null) throw new ItemFilmAlreadyExists();
 		
 		items.add(new Film(title, genre, filmMaker, scriptWriter, length));
@@ -220,7 +220,7 @@ public class SocialNetwork {
 		Member member = authenticate(pseudo, password);
 		if (member == null) throw new NotMember("");
 		
-		Item item = findItem(title);
+		Item item = findItemBook(title);
 		if (item != null) throw new ItemBookAlreadyExists();
 		
 		items.add(new Book(title, genre, author, nbPages));
@@ -243,7 +243,12 @@ public class SocialNetwork {
 		
 		if(badTitleEntry(title)) throw new BadEntry("");
 		
-		Item item = findItem(title);
+		Item item = findItemBook(title);
+		if(item != null){
+			ll = item.consultItem(ll);
+		}
+		
+		item = findItemFilm(title);
 		if(item != null){
 			ll = item.consultItem(ll);
 		}
@@ -287,10 +292,10 @@ public class SocialNetwork {
 		Member member = authenticate(pseudo, password);
 		if (member == null) throw new NotMember("");
 		
-		Item item = findItem(title);
+		Item item = findItemFilm(title);
 		if(item == null) throw new NotItem("");
-		Review review = item.addReview(member, commentary, rating);
-		member.addReview(review);
+		
+		member.addReview(item, commentary, rating);	
 		
 		return item.average();
 	}
@@ -331,10 +336,10 @@ public class SocialNetwork {
 		Member member = authenticate(pseudo, password);
 		if (member == null) throw new NotMember("");
 		
-		Item item = findItem(title);
+		Item item = findItemBook(title);
 		if(item == null) throw new NotItem("");
-		Review review = item.addReview(member, commentary, rating);
-		member.addReview(review);
+		
+		member.addReview(item, commentary, rating);	
 		
 		return item.average();
 	}
@@ -354,7 +359,7 @@ public class SocialNetwork {
 	 * Permet de vérifier que le pseudo est bien instancié et d'une longueur supérieure à 1 
 	 * @param pseudo pseudo du membre
 	 * 
-	 * @return boolean renvoie 
+	 * @return boolean renvoie true si erreur, false si bonne syntaxe et instancié
 	 */
 	
 	public boolean badPseudoEntry(String pseudo){
@@ -366,7 +371,9 @@ public class SocialNetwork {
 	}
 
 	/**
-	 * Permet de vérifier que le password est bien instancié et d'une longueur supérieure à 3 
+	 * 
+	 * @param password
+	 * @return
 	 */
 	
 	public boolean badPasswordEntry(String password){
@@ -388,8 +395,11 @@ public class SocialNetwork {
 		if(profile == null) return true;
 		else return false;
 	}
+	
 	/**
-	 * Permet de vérifier que le titre est bien instancié et d'une longueur supérieure à 1 
+	 * 
+	 * @param title 
+	 * @return 
 	 */
 	
 	public boolean badTitleEntry(String title){
@@ -465,15 +475,34 @@ public class SocialNetwork {
 	}
 
 	
-	public Item findItem(String searchItem){
+	/**
+	 * 
+	 * @param searchItem
+	 * @return The item with the title searchItem or null if not found
+	 */
+	public Item findItemBook(String searchItem){
 		
 		Item itemFound = null;
 
 		for(Item search : items){
 			itemFound = search.itemExists(searchItem);
-			if(itemFound != null)break;
+			if(itemFound != null && itemFound instanceof Book)break;
+			itemFound = null;
 		}
 		
+		return itemFound;
+	}
+	
+	public Item findItemFilm(String searchItem){
+
+		Item itemFound = null;
+
+		for(Item search : items){
+			itemFound = search.itemExists(searchItem);
+			if(itemFound != null && itemFound instanceof Film)break;
+			itemFound = null;
+		}
+
 		return itemFound;
 	}
 }

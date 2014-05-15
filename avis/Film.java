@@ -18,17 +18,20 @@ public class Film extends Item {
 	 */
 	private int length;
 	
+	/**
+	 * 
+	 * @param title
+	 * @param genre
+	 * @param filmMaker
+	 * @param scriptWriter
+	 * @param length
+	 */
 	public Film(String title, String genre, String filmMaker, String scriptWriter, int length) {
 		
 		super(title, genre);
 		this.filmMaker = filmMaker;
 		this.scriptWriter = scriptWriter;
 		this.length = length;
-	}
-	/**
-	*/
-	public static void main(String[] main){
-		
 	}
 	
 	@Override
@@ -38,8 +41,16 @@ public class Film extends Item {
 		ll.add(genre);
 		ll.add(filmMaker);
 		ll.add(scriptWriter);
+		ll.add(Integer.toString(length));
 		ll.add(Float.toString(super.average()));
 		
 		return ll;
 	}
+	
+	/**
+	*/
+	public static void main(String[] main){
+		
+	}
+	
 }
