@@ -64,6 +64,9 @@ public class SocialNetwork {
 	 */
 
 	public SocialNetwork() {
+		
+		members = new LinkedList<Member>();
+		items = new LinkedList<Item>();
 	}
 
 	/**
@@ -83,7 +86,12 @@ public class SocialNetwork {
 	 */
 	public int nbFilms() {
 		
-		return 0;
+		int nbFilms = 0;
+		
+		for(Item i : items){
+			if(i instanceof Film) nbFilms++;
+		}
+		return nbFilms;
 	}
 
 	/**
@@ -92,7 +100,13 @@ public class SocialNetwork {
 	 * @return le nombre de livres
 	 */
 	public int nbBooks() {
-		return 0;
+
+		int nbBooks = 0;
+
+		for(Item i : items){
+			if(i instanceof Film) nbBooks++;
+		}
+		return nbBooks;
 	}
 
 
@@ -113,14 +127,16 @@ public class SocialNetwork {
 	 * @throws MemberAlreadyExists membre de même pseudo déjà présent dans le <i>SocialNetwork</i> (même pseudo : indifférent à  la casse  et aux leadings et trailings blanks)
 	 * 
 	 */
-	public void addMember(String pseudo, String password, String profil) throws BadEntry, MemberAlreadyExists  {
+	public void addMember(String pseudo, String password, String profile) throws BadEntry, MemberAlreadyExists  {
 		
-		if (badPseudoEntry(pseudo)) throw new BadEntry("");
-		if (badPasswordEntry(password)) throw new BadEntry("");
+		if(badPseudoEntry(pseudo)) throw new BadEntry("");
+		if(badPasswordEntry(password)) throw new BadEntry("");
+		if(badProfileEntry(profile)) throw new BadEntry("");
 		
 		Member member = authenticate(pseudo, password);
-		if (member == null) throw new MemberAlreadyExists();
-
+		if (member != null) throw new MemberAlreadyExists();
+		
+		members.add(new Member(pseudo,password,profile));
 	}
 
 
@@ -149,15 +165,23 @@ public class SocialNetwork {
 	 * @throws ItemFilmAlreadyExists : item film de même titre  déjà présent (même titre : indifférent à  la casse  et aux leadings et trailings blanks)
 	 * 
 	 */
-	public void addItemFilm(String pseudo, String password, String titre, String genre, String realisateur, String scenariste, int duree) throws BadEntry, NotMember, ItemFilmAlreadyExists {
+	public void addItemFilm(String pseudo, String password, String title, String genre, String filmMaker, String scriptWriter, int length) throws BadEntry, NotMember, ItemFilmAlreadyExists {
 
 		if (badPseudoEntry(pseudo)) throw new BadEntry("");
 		if (badPasswordEntry(password)) throw new BadEntry("");
-		if (badTitleEntry(titre)) throw new BadEntry("");
+		if (badTitleEntry(title)) throw new BadEntry("");
+		if (badGenreEntry(genre)) throw new BadEntry("");
+		if (badFilmMakerEntry(filmMaker)) throw new BadEntry("");
+		if (badScriptWriterEntry(scriptWriter)) throw new BadEntry("");
+		if (length < 0) throw new BadEntry("");
 		
 		Member member = authenticate(pseudo, password);
 		if (member == null) throw new NotMember("");
 		
+		Item item = findItem(title);
+		if (item != null) throw new ItemFilmAlreadyExists();
+		
+		items.add(new Film(title, genre, filmMaker, scriptWriter, length));
 	}
 
 	/**
@@ -184,15 +208,22 @@ public class SocialNetwork {
 	 * 
 	 * 
 	 */
-	public void addItemBook(String pseudo, String password, String titre, String genre, String auteur, int nbPages) throws  BadEntry, NotMember, ItemBookAlreadyExists{
+	public void addItemBook(String pseudo, String password, String title, String genre, String author, int nbPages) throws  BadEntry, NotMember, ItemBookAlreadyExists{
 
 		if (badPseudoEntry(pseudo)) throw new BadEntry("");
 		if (badPasswordEntry(password)) throw new BadEntry("");
-		if (badTitleEntry(titre)) throw new BadEntry("");
+		if (badTitleEntry(title)) throw new BadEntry("");
+		if (badGenreEntry(genre)) throw new BadEntry("");
+		if (badAuthorEntry(author)) throw new BadEntry("");
+		if (nbPages < 0) throw new BadEntry("");
 		
 		Member member = authenticate(pseudo, password);
 		if (member == null) throw new NotMember("");
 		
+		Item item = findItem(title);
+		if (item != null) throw new ItemBookAlreadyExists();
+		
+		items.add(new Book(title, genre, author, nbPages));
 	}
 
 	/**
@@ -209,7 +240,6 @@ public class SocialNetwork {
 	public LinkedList <String> consultItems(String nom) throws BadEntry {
 		return new LinkedList <String> ();
 	}
-
 
 
 	/**
@@ -246,7 +276,12 @@ public class SocialNetwork {
 		Member member = authenticate(pseudo, password);
 		if (member == null) throw new NotMember("");
 		
-		return 0.0f;
+		Item item = findItem(title);
+		if(item == null) throw new NotItem("");
+		Review review = item.addReview(member, commentary, rating);
+		member.addReview(review);
+		
+		return item.average();
 	}
 
 
@@ -286,10 +321,11 @@ public class SocialNetwork {
 		if (member == null) throw new NotMember("");
 		
 		Item item = findItem(title);
+		if(item == null) throw new NotItem("");
 		Review review = item.addReview(member, commentary, rating);
 		member.addReview(review);
 		
-		return 0.0f;
+		return item.average();
 	}
 
 
@@ -331,6 +367,17 @@ public class SocialNetwork {
 	}
 	
 	/**
+	 * Check if the profile has been instanciated and insure that he is more than 0 character length
+	 * @param profile the member profile
+	 * @return true when the profile is not instanciated or of 0 characters
+	 */
+	
+	public boolean badProfileEntry(String profile){
+		
+		if(profile == null) return true;
+		else return false;
+	}
+	/**
 	 * Permet de v�rifier que le titre est bien instanci� et d'une longueur sup�rieure � 1 
 	 */
 	
@@ -339,6 +386,30 @@ public class SocialNetwork {
 		if(title == null)return true;
 		 
 		if(title.trim().length() < 1)return true;
+		else return false;
+	}
+	
+	public boolean badFilmMakerEntry(String filmMaker){
+
+		if(filmMaker == null) return true;
+		else return false;
+	}
+	
+	public boolean badScriptWriterEntry(String scriptWriter){
+		
+		if(scriptWriter == null) return true;
+		else return false;
+	}
+	
+	public boolean badAuthorEntry(String author){
+		
+		if(author == null) return true;
+		else return false;
+	}
+	
+	public boolean badGenreEntry(String genre){
+
+		if(genre == null) return true;
 		else return false;
 	}
 	
@@ -355,7 +426,9 @@ public class SocialNetwork {
 	/**
 	 */
 	public boolean badRatingEntry(float rating){
-		return false;	
+		
+		if(rating < 0 || rating > 5) return true;
+		else return false;	
 	}
 
 	/** 
@@ -374,6 +447,7 @@ public class SocialNetwork {
 		
 		for (Member m : members){
 			memberFound = m.userExists(pseudo, password);
+			if(memberFound != null) break;
 		}
 		
 		return memberFound;
@@ -382,7 +456,14 @@ public class SocialNetwork {
 	
 	public Item findItem(String searchItem){
 		
-		return null;
+		Item itemFound = null;
+
+		for(Item search : items){
+			itemFound = search.itemExists(searchItem);
+			if(itemFound != null)break;
+		}
+		
+		return itemFound;
 	}
 
 		

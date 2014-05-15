@@ -24,21 +24,21 @@ public class Review {
 		
 	/**
 	 */
-	public static void main(String[] args){
-		
-	}
 		
 	public Review(Member member, Item item, String commentary, float rating){
+		
 		this.rating = rating;
 		this.member = member;
 		this.commentary = commentary;
 		this.item = item;
 	}
 
-	public float getRating() {
-		// TODO Auto-generated method stub
-		return 0;
+	public float getRating(){
+		
+		return rating;
 	}
 		
+	public static void main(String[] args){
 
+	}
 }

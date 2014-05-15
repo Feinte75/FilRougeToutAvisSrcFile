@@ -19,20 +19,34 @@ public abstract class Item {
 	 */
 	private LinkedList<Review> reviews;
 	
-	public float addReview(Review review){
-		reviews.add(review);
-		return average();
+	
+	public Item(String title, String genre){
+		
+		this.title = title;
+		this.genre = genre;
+		reviews = new LinkedList<Review>();
 	}
 
 	public Review addReview(Member member, String commentary, float rating){
 		
 		Review review = new Review(member, this, commentary, rating);
-		
+		reviews.add(review);
 		return review;
-		
+	}
+	
+	/**
+	 * 
+	 * @param title the tile of the item searched
+	 * @return the item if it is found, null either
+	 */
+	
+	public Item itemExists(String title){
+		if(this.title.equalsIgnoreCase(title.trim())) return this;
+		else return null;
 	}
 	
 	public float average(){
+		
 		float av = 0;
 		
 		for(Review sum : reviews){

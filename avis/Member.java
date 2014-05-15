@@ -29,16 +29,28 @@ public class Member {
 	 */
 	private LinkedList<Review> reviews;
 		
+	public Member(String pseudo, String password, String profile) {
+	
+		this.pseudo = pseudo;
+		this.password = password;
+		this.profile = profile;
+		this.reviews = new LinkedList<Review>();
+	}
+
 	/**
 	*/
-	
 	public Member userExists(String pseudo, String password){
-		if(this.pseudo.equals(pseudo) && this.password.equals(password)) return this;
+
+		if(this.pseudo.equalsIgnoreCase(pseudo.trim()) && this.password.equals(password)) return this;
 		else return null;
 	}
 	
 	public void addReview(Review review){
 		
+	}
+	
+	public String toString(){
+		return "My pseudo is :" +pseudo+ " my password is :" +password+ " and my profile is :" +profile;
 	}
 	
 	public static void main(String[] args){

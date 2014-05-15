@@ -107,19 +107,18 @@ public class TestsAddItemFilm {
 		System.out.println("Tests  ajouter des films au réseau social  ");
 
 		// tests de addItemFilms
-		nbMembres = sn.nbMembers();
+		
 		nbLivres = sn.nbBooks();
 		
 		try {
 			sn.addMember("Jordan", "abcd", "Surfeur sexy");
 			sn.addMember("Glenn", "bcde", "ok");
 			sn.addMember("Alice", "cdef", "bref");
+			nbMembres = sn.nbMembers();
 			
 		} catch (Exception e) {	
 			System.out.println("Test AddItemFilm échoué : Exception non prevue : Revoir methodes dans le bloc try");
 		}
-		
-		int age=0;
 		
 		addItemFilmBadEntryTest(sn, null, "abcd", "test", "drame", "john", "do", 120, "4.1", "L'ajout d'un film par un membre dont le pseudo n'est pas instancié est accepté" );
 		addItemFilmBadEntryTest(sn, " ", "abcd", "test", "drame", "john", "do", 120, "4.2", "L'ajout d'un film par un membre dont le pseudo n'est composé que d'espaces est accepté" );
@@ -130,8 +129,6 @@ public class TestsAddItemFilm {
 		addItemFilmBadEntryTest(sn, "Jordan", "abcd", "test", null, "john", "do", 120, "4.7", "L'ajout d'un film dont le genre n'est pas instancié est accepté");
 		addItemFilmBadEntryTest(sn, "Jordan", "abcd", "test", "drame", null, "do", 120, "4.8", "L'ajout d'un film dont le realisateur n'est pas instancié est accepté");
 		addItemFilmBadEntryTest(sn, "Jordan", "abcd", "test", "drame", "john", null, 120, "4.9", "L'ajout d'un film dont le scenariste n'est pas instancié est accepté");
-		addItemFilmBadEntryTest(sn, "Jordan", "abcd", "test", "drame", "john", "do", 120, "4.10", "L'ajout d'un film dont le realisateur n'est pas instancié est accepté");
-		addItemFilmBadEntryTest(sn, "Jordan", "abcd", "test", "drame", "john", "do", age, "4.11", "L'ajout d'un film dont la duree n'est pas instancié est accepté");
 		addItemFilmBadEntryTest(sn, "Jordan", "abcd", "test", "drame", "john", "do", -5, "4.12", "L'ajout d'un film dont la duree est negative est accepté");
 		
 		addItemFilmOKTest (sn, "Jordan","abcd","test", "drame","john","do", 125, "4.20");
@@ -141,9 +138,9 @@ public class TestsAddItemFilm {
 		// tentative d'ajout d'un film "existant"
 
 		addItemFilmAlreadyExistsTest(sn, "Jordan","abcd","test", "drame","john","do", 125, "4.23", "L'ajout d'un film avec le titre du premier film ajouté est accepté");
-		addItemFilmAlreadyExistsTest(sn, "Alice", "abcd", "test3","humour", "john", "jean", 100, "4.24", "L'ajout d'un film avec le titre du dernier film ajouté est accepté");
-		addItemFilmAlreadyExistsTest(sn, "Glenn", "abcd", "TEST2","action", "john", "didier", 90, "4.25", "L'ajout d'un film avec le titre d'un film existant (avec casse différente) est accepté");
-		addItemFilmAlreadyExistsTest(sn, "Glenn", "abcd", "  test2  ","action", "john", "didier", 90, "4.26","L'ajout d'un film avec le titre d'un film existant (avec leadings et trailings blanks) est accepté");       
+		addItemFilmAlreadyExistsTest(sn, "Alice", "cdef", "test3","humour", "john", "jean", 100, "4.24", "L'ajout d'un film avec le titre du dernier film ajouté est accepté");
+		addItemFilmAlreadyExistsTest(sn, "Glenn", "bcde", "TEST2","action", "john", "didier", 90, "4.25", "L'ajout d'un film avec le titre d'un film existant (avec casse différente) est accepté");
+		addItemFilmAlreadyExistsTest(sn, "Glenn", "bcde", "  test2  ","action", "john", "didier", 90, "4.26","L'ajout d'un film avec le titre d'un film existant (avec leadings et trailings blanks) est accepté");       
 
 		addItemFilmNotMember(sn, "George", "abcd","test2", "drame","john","do", 125, "4.27", "L'ajout d'un film par un non membre est accepté");
 		addItemFilmNotMember(sn, "Jordan", "efgh","test2", "drame","john","do", 125, "4.28", "L'ajout d'un film avec mauvais login/pwd est accepté");

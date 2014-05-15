@@ -11,9 +11,16 @@ public class Book extends Item {
 	 * @uml.property  name="nbPages"
 	 */
 	private int nbPages;
+	
+	public Book(String title, String genre, String author, int nbPages) {
 		
+		super(title, genre);
+		this.author = author;
+		this.nbPages = nbPages;
+	}
+
 	/**
-	 * test 9
+	 *
 	*/
 	public static void main(String[] args){
 		

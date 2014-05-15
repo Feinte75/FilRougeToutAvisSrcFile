@@ -21,10 +21,6 @@ import java.util.LinkedList;
  */
 public class IHM {
 
-
-
-
-
 	/**
 	 * @uml.property  name="metier"
 	 * @uml.associationEnd  

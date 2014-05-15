@@ -95,9 +95,7 @@ public class TestsAddMember {
 		addMemberBadEntryTest ( sn, "B", null, "", "3.3", "L'ajout d'un membre dont le password n'est pas instancié est accepté");
 		addMemberBadEntryTest ( sn, "B", "   qwd ", "", "3.4", "L'ajout d'un membre dont le password ne contient pas au moins 4 caracteres, autre que des espaces de début ou de fin, est accepté");
 		addMemberBadEntryTest ( sn, "BBBB", "bbbb", null, "3.5", "L'ajout d'un membre dont le profil n'est pas instancié est accepté");
-
-
-
+		
 		// <=> fiche numéro 2
 
 		// ajout de 3 membres avec entrées "correctes"
@@ -108,10 +106,10 @@ public class TestsAddMember {
 
 		// tentative d'ajout de membre "existant"
 
-		addMemberAlreadyExistsTest(sn, "Paul", "abcdefghij", "", "3.7", "L'ajout d'un membre avec le pseudo du premier membre ajouté est accepté");
-		addMemberAlreadyExistsTest(sn, "Alice", "abcdefghij", "", "3.8", "L'ajout d'un membre avec le pseudo du dernier membre ajouté est accepté");
-		addMemberAlreadyExistsTest(sn, "anToine", "abcdefghij", "", "3.9", "L'ajout d'un membre avec un pseudo existant (avec casse différente) est accepté");
-		addMemberAlreadyExistsTest(sn, " Antoine ", "abcdefghij", "", "3.10", "L'ajout d'un membre avec un pseudo existant (avec leading et trailing blanks) est accepté");		
+		addMemberAlreadyExistsTest(sn, "Paul", "paul", "", "3.7", "L'ajout d'un membre avec le pseudo du premier membre ajouté est accepté");
+		addMemberAlreadyExistsTest(sn, "Alice", "alice", "", "3.8", "L'ajout d'un membre avec le pseudo du dernier membre ajouté est accepté");
+		addMemberAlreadyExistsTest(sn, "anToine", "antoine", "", "3.9", "L'ajout d'un membre avec un pseudo existant (avec casse différente) est accepté");
+		addMemberAlreadyExistsTest(sn, " Antoine ", "antoine", "", "3.10", "L'ajout d'un membre avec un pseudo existant (avec leading et trailing blanks) est accepté");		
 
 
 		if (nbFilms != sn.nbFilms()) {
