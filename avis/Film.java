@@ -37,12 +37,14 @@ public class Film extends Item {
 	@Override
 	public LinkedList<String> consultItem(LinkedList<String> ll) {
 		
+		ll.add("Film");
 		ll.add(title);
 		ll.add(genre);
 		ll.add(filmMaker);
 		ll.add(scriptWriter);
 		ll.add(Integer.toString(length));
 		ll.add(Float.toString(super.average()));
+		ll.add("");
 		
 		return ll;
 	}

@@ -24,11 +24,13 @@ public class Book extends Item {
 	@Override
 	public LinkedList<String> consultItem(LinkedList<String> ll) {
 		
+		ll.add("Book");
 		ll.add(title);
 		ll.add(genre);
 		ll.add(author);
 		ll.add(Integer.toString(nbPages));
 		ll.add(Float.toString(super.average()));
+		ll.add("");
 		
 		return ll;
 	}
