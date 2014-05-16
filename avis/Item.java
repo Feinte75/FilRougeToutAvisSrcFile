@@ -32,7 +32,6 @@ public abstract class Item {
 		reviews.add(r);
 	}
 	
-	
 	/**
 	 * 
 	 * @param title the title of the item searched

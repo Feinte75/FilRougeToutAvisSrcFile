@@ -127,6 +127,7 @@ public class TestsAddItemBook {
 		addItemBookBadEntryTest(sn, "Jordan", "abcd", "   ", "drame", "john", 120, "4.6", "L'ajout d'un livre dont le titre n'est constitué que d'espaces est accepté");
 		addItemBookBadEntryTest(sn, "Jordan", "abcd", "test", null, "john", 120, "4.7", "L'ajout d'un livre dont le genre n'est pas instancié est accepté");
 		addItemBookBadEntryTest(sn, "Jordan", "abcd", "test", "drame", null, 120, "4.8", "L'ajout d'un livre dont l'auteur n'est pas instancié est accepté");
+		addItemBookBadEntryTest(sn, "Jordan", "abcd", "test4.9", "drame", "john", 0, "4.9", "L'ajout d'un livre de 0 pages est accepté");
 		
 		
 		addItemBookOKTest (sn, "Jordan","abcd","test", "drame","john", 125, "4.20");

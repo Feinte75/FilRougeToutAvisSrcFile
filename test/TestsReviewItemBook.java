@@ -101,7 +101,7 @@ public class TestsReviewItemBook {
 		reviewItemBookBadEntryTest(sn, "Jordan", "abcd", "test", -5, "Pourri", "5.7", "L'ajout d'un commentaire dont la note n'est pas comprise entre 0 et 5 est accepté");
 		reviewItemBookBadEntryTest(sn, "Jordan", "abcd", "test", 4, null, "5.8", "L'ajout d'un commentaire non instancié est accepté");
 		
-		reviewItemBookOkTest (sn, "Jordan","abcd","test", 4, "Pourri", "5.9");
+		reviewItemBookOkTest (sn, "Jordan","abcd","test", 5, "Pourri", "5.9");
 
 		reviewItemBookNotItemTest (sn, "Jordan","abcd","test2", 4, "Pourri", "5.10", "L'ajout d'un commentaire pour un livre inexistant est accepté");
 		

@@ -44,6 +44,13 @@ public class Member {
 		else return null;
 	}
 	
+	/**
+	 * 
+	 * @param item
+	 * @param commentary
+	 * @param rating
+	 * @return
+	 */
 	public Review addReview(Item item, String commentary, float rating){
 		
 		Review review = reviewAlreadyExists(item);
@@ -51,6 +58,7 @@ public class Member {
 		else{
 			review = new Review(this, item, commentary, rating);
 			item.addReview(review);
+			reviews.add(review);
 			return review;	
 		}
 	}

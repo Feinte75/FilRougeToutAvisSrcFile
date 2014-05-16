@@ -173,7 +173,7 @@ public class SocialNetwork {
 		if (badGenreEntry(genre)) throw new BadEntry("");
 		if (badFilmMakerEntry(filmMaker)) throw new BadEntry("");
 		if (badScriptWriterEntry(scriptWriter)) throw new BadEntry("");
-		if (length < 0) throw new BadEntry("");
+		if (length <= 0) throw new BadEntry("");
 		
 		Member member = authenticate(pseudo, password);
 		if (member == null) throw new NotMember("");
@@ -215,7 +215,7 @@ public class SocialNetwork {
 		if (badTitleEntry(title)) throw new BadEntry("");
 		if (badGenreEntry(genre)) throw new BadEntry("");
 		if (badAuthorEntry(author)) throw new BadEntry("");
-		if (nbPages < 0) throw new BadEntry("");
+		if (nbPages <= 0) throw new BadEntry("");
 		
 		Member member = authenticate(pseudo, password);
 		if (member == null) throw new NotMember("");
@@ -325,6 +325,7 @@ public class SocialNetwork {
 	 * 
 	 * @return la note moyenne des notes sur ce livre
 	 */
+	
 	public float reviewItemBook(String pseudo, String password, String title, float rating, String commentary) throws BadEntry, NotMember, NotItem {
 		
 		if (badPseudoEntry(pseudo)) throw new BadEntry("");
@@ -391,7 +392,7 @@ public class SocialNetwork {
 	 */
 	
 	public boolean badProfileEntry(String profile){
-		
+
 		if(profile == null) return true;
 		else return false;
 	}
@@ -493,6 +494,11 @@ public class SocialNetwork {
 		return itemFound;
 	}
 	
+	/**
+	 * 
+	 * @param searchItem
+	 * @return
+	 */
 	public Item findItemFilm(String searchItem){
 
 		Item itemFound = null;

@@ -11,6 +11,19 @@ public class TestsAddItemFilm {
 	public static int nbTestOk=0;
 	public static int nbTestFail=0;
 
+	/**
+	 * 
+	 * @param sn
+	 * @param pseudo
+	 * @param password
+	 * @param titre
+	 * @param genre
+	 * @param realisateur
+	 * @param scenariste
+	 * @param duree
+	 * @param idTest
+	 * @param messErreur
+	 */
 	public static void addItemFilmBadEntryTest(SocialNetwork sn, String pseudo, String password, String titre, 
 			String genre, String realisateur, String scenariste, int duree, String idTest, String messErreur){
 
@@ -35,7 +48,19 @@ public class TestsAddItemFilm {
 		}
 
 	}
-
+	
+	/**
+	 * 
+	 * @param sn
+	 * @param pseudo
+	 * @param password
+	 * @param titre
+	 * @param genre
+	 * @param realisateur
+	 * @param scenariste
+	 * @param duree
+	 * @param idTest
+	 */
 	public static void addItemFilmOKTest (SocialNetwork sn, String pseudo, String password, String titre, String genre, String realisateur, String scenariste, int duree, String idTest){
 		int nbFilms = sn.nbFilms();
 		try{
@@ -53,7 +78,20 @@ public class TestsAddItemFilm {
 			nbTestFail++;
 		}
 	}
-
+	
+	/**
+	 * 
+	 * @param sn
+	 * @param pseudo
+	 * @param password
+	 * @param titre
+	 * @param genre
+	 * @param realisateur
+	 * @param scenariste
+	 * @param duree
+	 * @param idTest
+	 * @param messErreur
+	 */
 	public static void addItemFilmAlreadyExistsTest (SocialNetwork sn, String pseudo, String password, String titre, String genre, String realisateur, String scenariste, int duree, String idTest, String messErreur){
 		int nbFilms = sn.nbFilms();
 		try {
@@ -76,6 +114,19 @@ public class TestsAddItemFilm {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param sn
+	 * @param pseudo
+	 * @param password
+	 * @param titre
+	 * @param genre
+	 * @param realisateur
+	 * @param scenariste
+	 * @param duree
+	 * @param idTest
+	 * @param messErreur
+	 */
 	public static void addItemFilmNotMember (SocialNetwork sn, String pseudo, String password, String titre, String genre, String realisateur, String scenariste, int duree, String idTest, String messErreur){
 		int nbFilms = sn.nbFilms();
 		try{
@@ -129,7 +180,7 @@ public class TestsAddItemFilm {
 		addItemFilmBadEntryTest(sn, "Jordan", "abcd", "test", null, "john", "do", 120, "4.7", "L'ajout d'un film dont le genre n'est pas instancié est accepté");
 		addItemFilmBadEntryTest(sn, "Jordan", "abcd", "test", "drame", null, "do", 120, "4.8", "L'ajout d'un film dont le realisateur n'est pas instancié est accepté");
 		addItemFilmBadEntryTest(sn, "Jordan", "abcd", "test", "drame", "john", null, 120, "4.9", "L'ajout d'un film dont le scenariste n'est pas instancié est accepté");
-		addItemFilmBadEntryTest(sn, "Jordan", "abcd", "test", "drame", "john", "do", -5, "4.12", "L'ajout d'un film dont la duree est negative est accepté");
+		addItemFilmBadEntryTest(sn, "Jordan", "abcd", "test", "drame", "john", "do", 0, "4.12", "L'ajout d'un film dont la duree est nulle est accepté");
 		
 		addItemFilmOKTest (sn, "Jordan","abcd","test", "drame","john","do", 125, "4.20");
 		addItemFilmOKTest (sn, "Glenn", "bcde", "test2","action", "john", "didier", 90, "4.21");

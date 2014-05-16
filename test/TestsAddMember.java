@@ -22,10 +22,17 @@ public class TestsAddMember {
 	public static int nbTestOk=0;
 	public static int nbTestFail=0;
 
+	/**
+	 * 
+	 * @param sn
+	 * @param pseudo
+	 * @param pwd
+	 * @param profil
+	 * @param idTest
+	 * @param messErreur
+	 */
 	public static void addMemberBadEntryTest (SocialNetwork sn, String pseudo, String pwd, String profil, String idTest, String messErreur){
-		// vérifie que l'ajout d'un membre (pseudo, pwd, profil) est refusée (levée de l'exception BadEntry et  pas de modification du sn)
-		// si c'est bien le cas, ne fait rien
-		// sinon, affiche le message d'erreur passé en paramètre
+		
 		int nbMembres = sn.nbMembers();
 		try {
 			sn.addMember (pseudo, pwd, profil);
@@ -38,7 +45,15 @@ public class TestsAddMember {
 		}
 		catch (Exception e) {System.out.println ("Test " + idTest + " : exception non prévue. " + e); e.printStackTrace();}
 	}
-
+	
+	/**
+	 * 
+	 * @param sn
+	 * @param pseudo
+	 * @param pwd
+	 * @param profil
+	 * @param idTest
+	 */
 	public static void addMemberOKTest (SocialNetwork sn, String pseudo, String pwd, String profil, String idTest){
 		int nbMembres = sn.nbMembers();
 		try{
@@ -53,6 +68,15 @@ public class TestsAddMember {
 		catch (Exception e) {System.out.println ("Test " + idTest + " : exception non prévue. " + e); e.printStackTrace();}
 	}
 
+	/**
+	 * 
+	 * @param sn
+	 * @param pseudo
+	 * @param pwd
+	 * @param profil
+	 * @param idTest
+	 * @param messErreur
+	 */
 	public static void addMemberAlreadyExistsTest (SocialNetwork sn, String pseudo, String pwd, String profil, String idTest, String messErreur){
 		int nbMembres = sn.nbMembers();
 		try {
@@ -71,9 +95,7 @@ public class TestsAddMember {
 
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
-		int nbMembres = 0;
 		int nbLivres = 0;
 		int nbFilms = 0;
 
