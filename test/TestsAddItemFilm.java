@@ -102,13 +102,13 @@ public class TestsAddItemFilm {
 		SocialNetwork sn = new SocialNetwork();
 
 		int nbMembres = 0;
-		int nbLivres = 0;
+		int nbFilms = 0;
 
 		System.out.println("Tests  ajouter des films au réseau social  ");
 
 		// tests de addItemFilms
 		
-		nbLivres = sn.nbBooks();
+		nbFilms = sn.nbFilms();
 		
 		try {
 			sn.addMember("Jordan", "abcd", "Surfeur sexy");
@@ -148,8 +148,8 @@ public class TestsAddItemFilm {
 		if (nbMembres != sn.nbMembers()) {
 			System.out.println("Erreur 4.29 :  le nombre de membres après utilisation de addItemFilms a été modifié");
 		}
-		if (nbLivres != sn.nbBooks()) {
-			System.out.println("Erreur 4.30 :  le nombre de livres après utilisation de addItemFilms a été modifié");               
+		if (nbFilms != sn.nbFilms()) {
+			System.out.println("Erreur 4.30 :  le nombre de films après utilisation de addItemFilms a été modifié");               
 		}
 
 	}
