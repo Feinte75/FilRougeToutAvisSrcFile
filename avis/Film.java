@@ -34,19 +34,9 @@ public class Film extends Item {
 		this.length = length;
 	}
 	
-	@Override
-	public LinkedList<String> consultItem(LinkedList<String> ll) {
+	public String toString(){
 		
-		ll.add("Film");
-		ll.add(title);
-		ll.add(genre);
-		ll.add(filmMaker);
-		ll.add(scriptWriter);
-		ll.add(Integer.toString(length));
-		ll.add(Float.toString(super.average()));
-		ll.add("");
-		
-		return ll;
+		return "Film :" +title+ " genre :" +genre+ " film maker :" +filmMaker+ " script writer :" +scriptWriter+ " length :" +length+ " average rating :" +average();
 	}
 	
 	/**

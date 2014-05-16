@@ -128,7 +128,7 @@ public class TestsAddMember {
 
 		// tentative d'ajout de membre "existant"
 
-		addMemberAlreadyExistsTest(sn, "Paul", "paul", "", "3.7", "L'ajout d'un membre avec le pseudo du premier membre ajouté est accepté");
+		addMemberAlreadyExistsTest(sn, "Paul", "dfsf", "", "3.7", "L'ajout d'un membre avec le pseudo du premier membre ajouté est accepté");
 		addMemberAlreadyExistsTest(sn, "Alice", "alice", "", "3.8", "L'ajout d'un membre avec le pseudo du dernier membre ajouté est accepté");
 		addMemberAlreadyExistsTest(sn, "anToine", "antoine", "", "3.9", "L'ajout d'un membre avec un pseudo existant (avec casse différente) est accepté");
 		addMemberAlreadyExistsTest(sn, " Antoine ", "antoine", "", "3.10", "L'ajout d'un membre avec un pseudo existant (avec leading et trailing blanks) est accepté");		

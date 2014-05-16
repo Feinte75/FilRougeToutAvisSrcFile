@@ -28,7 +28,6 @@ public abstract class Item {
 	}
 
 	public void addReview(Review r){
-		
 		reviews.add(r);
 	}
 	
@@ -57,12 +56,5 @@ public abstract class Item {
 		
 		return av;
 	}
-	
-	/**
-	 * 
-	 * @param ll the linked list to fill with the item information
-	 * @return the linked list filled or null if no item was found
-	 */
-	public abstract LinkedList<String> consultItem(LinkedList<String> ll);
 
 }

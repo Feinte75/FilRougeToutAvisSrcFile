@@ -21,18 +21,9 @@ public class Book extends Item {
 		this.nbPages = nbPages;
 	}
 
-	@Override
-	public LinkedList<String> consultItem(LinkedList<String> ll) {
-		
-		ll.add("Book");
-		ll.add(title);
-		ll.add(genre);
-		ll.add(author);
-		ll.add(Integer.toString(nbPages));
-		ll.add(Float.toString(super.average()));
-		ll.add("");
-		
-		return ll;
+	public String toString(){
+
+		return "Film :" +title+ " genre :" +genre+ " author:" +author+ " number pages :" +nbPages+ " average rating :" +average();
 	}
 
 	public static void main(String[] args){

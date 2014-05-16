@@ -45,11 +45,11 @@ public class Member {
 	}
 	
 	/**
-	 * 
-	 * @param item
-	 * @param commentary
-	 * @param rating
-	 * @return
+	 * Add a review to the given Item, if the member already reviewed the Item, the review is updated
+	 * @param item item to review
+	 * @param commentary comment to add to the review
+	 * @param rating rating of the review
+	 * @return the new review or the modified review
 	 */
 	public Review addReview(Item item, String commentary, float rating){
 		
@@ -63,6 +63,21 @@ public class Member {
 		}
 	}
 	
+	public float getKarma(){
+		
+		float karma;
+		
+		for(Review r : reviews){
+			
+		}
+		return 0;
+	}
+	
+	/**
+	 * Test if a review from the member has already been done
+	 * @param item 
+	 * @return
+	 */
 	public Review reviewAlreadyExists(Item item){
 		
 		for(Review r : reviews){

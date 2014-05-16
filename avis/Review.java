@@ -1,5 +1,7 @@
 package avis;
 
+import java.util.LinkedList;
+
 
 public class Review {
 
@@ -21,6 +23,12 @@ public class Review {
 	 * @uml.associationEnd multiplicity="(1 1)" inverse="reviews:avis.Item"
 	 */
 	private Item item = null;
+	
+	/** 
+	 * @uml.property name="review2"
+	 * @uml.associationEnd multiplicity="(0 -1)" dimension="1" ordering="true" inverse="review1:avis.Review"
+	 */
+	private LinkedList<Review> opinionsReview;
 		
 	/**
 	 */
@@ -33,10 +41,23 @@ public class Review {
 		this.item = item;
 	}
 	
+	/**
+	 * Modify and existing review
+	 * @param commentary New commentary
+	 * @param rating New rating
+	 * @return 
+	 */
 	public Review modifyReview(String commentary, float rating){
 		this.commentary = commentary;
 		this.rating = rating;
 		return this;
+	}
+	
+	public void addOpinion(Review r){
+		
+		if(opinionsReview == null) opinionsReview = new LinkedList<Review>();
+		
+		opinionsReview.add(r);
 	}
 
 	public float getRating(){
@@ -51,4 +72,6 @@ public class Review {
 	public static void main(String[] args){
 
 	}
+	
+	
 }

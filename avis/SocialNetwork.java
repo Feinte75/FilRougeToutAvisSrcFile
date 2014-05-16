@@ -245,12 +245,12 @@ public class SocialNetwork {
 		
 		Item item = findItemBook(title);
 		if(item != null){
-			ll = item.consultItem(ll);
+			ll.add(item.toString());
 		}
 		
 		item = findItemFilm(title);
 		if(item != null){
-			ll = item.consultItem(ll);
+			ll.add(item.toString());
 		}
 		
 		return ll;
@@ -345,7 +345,43 @@ public class SocialNetwork {
 		return item.average();
 	}
 
+	
+	public void reviewOpinionBook(String pseudo, String password, String title, float rating, String commentary) throws BadEntry, NotMember, NotItem{
+		
+		if (badPseudoEntry(pseudo)) throw new BadEntry("");
+		if (badPasswordEntry(password)) throw new BadEntry("");
+		if (badTitleEntry(title)) throw new BadEntry("");
+		if (badCommentaryEntry(commentary)) throw new BadEntry("");
+		if (badRatingEntry(rating)) throw new BadEntry("");
+		
+		Member member = authenticate(pseudo, password);
+		if (member == null) throw new NotMember("");
+		
+		Item item = findItemBook(title);
+		if(item == null) throw new NotItem("");
+		
+		Review review = member.reviewAlreadyExists(item);
+		
+	}
 
+	public void reviewOpinionFilm(String pseudo, String password, String title, float rating, String commentary) throws BadEntry, NotMember, NotItem{
+
+		if (badPseudoEntry(pseudo)) throw new BadEntry("");
+		if (badPasswordEntry(password)) throw new BadEntry("");
+		if (badTitleEntry(title)) throw new BadEntry("");
+		if (badCommentaryEntry(commentary)) throw new BadEntry("");
+		if (badRatingEntry(rating)) throw new BadEntry("");
+
+		Member member = authenticate(pseudo, password);
+		if (member == null) throw new NotMember("");
+
+		Item item = findItemFilm(title);
+		if(item == null) throw new NotItem("");
+
+		Review review = member.reviewAlreadyExists(item);
+		
+
+	}
 	/**
 	 * Obtenir une représentation textuelle du <i>SocialNetwork</i>.
 	 * 
