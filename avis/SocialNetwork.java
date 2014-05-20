@@ -2,12 +2,7 @@ package avis;
 
 import java.util.LinkedList;
 
-import exception.BadEntry;
-import exception.ItemBookAlreadyExists;
-import exception.ItemFilmAlreadyExists;
-import exception.MemberAlreadyExists;
-import exception.NotItem;
-import exception.NotMember;
+import exception.*;
 
 /** 
  * @author A. Beugnard, 
@@ -295,7 +290,7 @@ public class SocialNetwork {
 		Item item = findItemFilm(title);
 		if(item == null) throw new NotItem("");
 		
-		member.addReview(item, commentary, rating);	
+		Review review = member.addReview(item, commentary, rating);	
 		
 		return item.average();
 	}
@@ -340,47 +335,96 @@ public class SocialNetwork {
 		Item item = findItemBook(title);
 		if(item == null) throw new NotItem("");
 		
-		member.addReview(item, commentary, rating);	
-		
+		Review review = member.addReview(item, commentary, rating);	
 		return item.average();
 	}
 
-	
-	public void reviewOpinionBook(String pseudo, String password, String title, float rating, String commentary) throws BadEntry, NotMember, NotItem{
+	/**
+	 * 
+	 * @param pseudo
+	 * @param password
+	 * @param commentaryAuthor
+	 * @param title
+	 * @param rating
+	 * @param commentary
+	 * @throws BadEntry
+	 * @throws NotMember
+	 * @throws NotItem
+	 * @throws NotReview
+	 */
+	public void reviewOpinionBook(String pseudo, String password, String commentaryAuthor, String title, float rating, String commentary) throws BadEntry, NotMember, NotItem, NotReview{
 		
 		if (badPseudoEntry(pseudo)) throw new BadEntry("");
 		if (badPasswordEntry(password)) throw new BadEntry("");
+		if (badPseudoEntry(commentaryAuthor)) throw new BadEntry("");
 		if (badTitleEntry(title)) throw new BadEntry("");
 		if (badCommentaryEntry(commentary)) throw new BadEntry("");
 		if (badRatingEntry(rating)) throw new BadEntry("");
 		
+		// Authenticate the author of the opinion about the review
 		Member member = authenticate(pseudo, password);
-		if (member == null) throw new NotMember("");
+		if (member == null) throw new NotMember("Member");
 		
+		// Find the autor of the review
+		Member memberCriticated = userExists(commentaryAuthor);
+		if (memberCriticated == null) throw new NotMember("Commentary Author");
+		
+		if(member == memberCriticated) throw new NotReview("Can't give an opinion about your own reviews");
+		
+		// Find the item book
 		Item item = findItemBook(title);
 		if(item == null) throw new NotItem("");
 		
-		Review review = member.reviewAlreadyExists(item);
+		// Find if the review exists
+		Review review = memberCriticated.reviewAlreadyExists(item);
+		if (review == null) throw new NotReview("Review doesn't exists");
 		
+		// Add the opinion
+		review.addOpinion(new Review(member, item, commentary, rating));		
 	}
 
-	public void reviewOpinionFilm(String pseudo, String password, String title, float rating, String commentary) throws BadEntry, NotMember, NotItem{
-
+	/**
+	 * 
+	 * @param pseudo
+	 * @param password
+	 * @param commentaryAuthor
+	 * @param title
+	 * @param rating
+	 * @param commentary
+	 * @throws BadEntry
+	 * @throws NotMember
+	 * @throws NotItem
+	 * @throws NotReview
+	 */
+	public void reviewOpinionFilm(String pseudo, String password, String commentaryAuthor, String title, float rating, String commentary) throws BadEntry, NotMember, NotItem, NotReview{
+		
 		if (badPseudoEntry(pseudo)) throw new BadEntry("");
 		if (badPasswordEntry(password)) throw new BadEntry("");
+		if (badPseudoEntry(commentaryAuthor)) throw new BadEntry("");
 		if (badTitleEntry(title)) throw new BadEntry("");
 		if (badCommentaryEntry(commentary)) throw new BadEntry("");
 		if (badRatingEntry(rating)) throw new BadEntry("");
-
+		
+		// Authenticate the author of the opinion about the review
 		Member member = authenticate(pseudo, password);
-		if (member == null) throw new NotMember("");
-
+		if (member == null) throw new NotMember("Member");
+		
+		// Find the autor of the review
+		Member memberCriticated = userExists(commentaryAuthor);
+		if (memberCriticated == null) throw new NotMember("Commentary Author");
+		
+		if(member == memberCriticated) throw new NotReview("Can't give an opinion about your own reviews");
+		
+		// Find the item book
 		Item item = findItemFilm(title);
 		if(item == null) throw new NotItem("");
-
-		Review review = member.reviewAlreadyExists(item);
 		
-
+		// Find if the review exists
+		Review review = memberCriticated.reviewAlreadyExists(item);
+		if (review == null) throw new NotReview("Review doesn't exists");
+		
+		// Add the opinion
+		review.addOpinion(new Review(member, item, commentary, rating));
 	}
 	/**
 	 * Obtenir une représentation textuelle du <i>SocialNetwork</i>.
@@ -504,11 +548,24 @@ public class SocialNetwork {
 		Member memberFound = null;
 		
 		for (Member m : members){
-			memberFound = m.userExists(pseudo, password);
+			memberFound = m.authenticate(pseudo, password);
 			if(memberFound != null) break;
 		}
 		
 		return memberFound;
+	}
+	
+	public Member userExists(String pseudo){
+
+		Member memberFound = null;
+
+		for (Member m : members){
+			memberFound = m.userExists(pseudo);
+			if(memberFound != null) break;
+		}
+
+		return memberFound;
+		
 	}
 
 	

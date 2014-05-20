@@ -27,8 +27,8 @@ public abstract class Item {
 		reviews = new LinkedList<Review>();
 	}
 
-	public void addReview(Review r){
-		reviews.add(r);
+	public void addReview(Review review){
+		reviews.add(review);
 	}
 	
 	/**

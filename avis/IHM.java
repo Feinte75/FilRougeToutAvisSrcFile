@@ -46,7 +46,9 @@ public class IHM {
 	 * @uml.property  name="profilMembre"
 	 */
 	private String profilMembre = "";
-
+	
+	private String pseudoCommentaryAuthor = "";
+	
 	/**
 	 * @uml.property  name="titreLivre"
 	 */
@@ -180,6 +182,12 @@ public class IHM {
 		menuMembre.add(jMenuItem);
 		jMenuItem = new JMenuItem("donner un avis sur un item film");
 		jMenuItem.addActionListener(new ReviewItem("film"));
+		menuMembre.add(jMenuItem);
+		jMenuItem = new JMenuItem("donne une opinion sur une review d'un livre");
+		jMenuItem.addActionListener(new AddOpinion("livre"));
+		menuMembre.add(jMenuItem);
+		jMenuItem = new JMenuItem("donne une opinion sur une review d'un film");
+		jMenuItem.addActionListener(new AddOpinion("film"));
 		menuMembre.add(jMenuItem);
 
 
@@ -614,6 +622,82 @@ public class IHM {
 						metier.reviewItemBook(pseudoMembre, passwordMembre, titreLivre, new Float(noteMembre), commentaireMembre);
 					if (type.equals("film"))
 						metier.reviewItemFilm(pseudoMembre, passwordMembre, titreLivre, new Float(noteMembre), commentaireMembre);
+
+				}
+				catch (Exception exception) {
+					if (type.equals("livre"))
+						JOptionPane.showMessageDialog(fenetreInteraction, "Exception dans reviewItemBook :   "  + exception);
+					if (type.equals("film"))
+						JOptionPane.showMessageDialog(fenetreInteraction, "Exception dans reviewItemFilm :   "  + exception);
+				}
+			}
+		}
+	}
+	
+
+	private class AddOpinion  implements ActionListener {
+		
+		JPanelEntree jPanelPseudo;
+		
+		JPanelPassword jPanelPassword;
+		
+		JPanelEntree jPanelCommentaryAuthor;
+		
+		JPanelEntree jPanelTitre;
+		
+		JPanelEntree jPanelNote;
+		
+		JScrollPaneTexte jScrollPaneCommentaire;
+
+		String type;
+
+		public AddOpinion(String type) {
+			this.type = type;
+		}
+		public void actionPerformed(ActionEvent e) {
+			JPanel reviewer = new JPanel();
+			jScrollPaneCommentaire = new JScrollPaneTexte(" commentaire ? ",  commentaireMembre, true, largeurFenetre);
+			reviewer.add(jScrollPaneCommentaire);
+			JPanel jPanelPseudoEtPasswordEtTitre = new JPanel();
+			jPanelPseudoEtPasswordEtTitre.setLayout(new GridLayout(6,1, 4, 4));
+			jPanelPseudo = new JPanelEntree(" pseudo membre ? ", pseudoMembre, largeurFenetre);
+			jPanelPseudoEtPasswordEtTitre.add(jPanelPseudo);
+			jPanelPassword = new JPanelPassword(" password membre ? ", passwordMembre, largeurFenetre);
+			jPanelPseudoEtPasswordEtTitre.add(jPanelPassword);
+			jPanelCommentaryAuthor = new JPanelEntree("pseudo auteur commentaire ?" , pseudoCommentaryAuthor , largeurFenetre);
+			jPanelPseudoEtPasswordEtTitre.add(jPanelCommentaryAuthor);
+			jPanelTitre = new JPanelEntree(" titre ? ", titreLivre, largeurFenetre);
+			jPanelPseudoEtPasswordEtTitre.add(jPanelTitre);
+			jPanelNote = new JPanelEntree(" note ? ", noteMembre, largeurFenetre);
+			jPanelPseudoEtPasswordEtTitre.add(jPanelNote);
+			JButton valider = new JButton("Valider reviewer item " + type); 
+			valider.setPreferredSize(new Dimension(largeurFenetre-20, 25));
+			valider.addActionListener(new ActionReviewItem());
+			jPanelPseudoEtPasswordEtTitre.add(valider);
+			reviewer.add(jPanelPseudoEtPasswordEtTitre);				
+			reviewer.setVisible(false);
+			fenetreInteraction.getContentPane().removeAll();
+			fenetreInteraction.repaint();
+			fenetreInteraction.setSize(largeurFenetre + 100, 495);
+			fenetreInteraction.getContentPane().add(reviewer);
+			reviewer.setVisible(true);			
+			fenetreInteraction.setVisible(true);			
+			fenetreInteraction.repaint();
+		}
+
+		class ActionReviewItem implements ActionListener {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					pseudoMembre = jPanelPseudo.getEntree(); 
+					passwordMembre = jPanelPassword.getPassword(); 
+					pseudoCommentaryAuthor = jPanelCommentaryAuthor.getEntree();
+					titreLivre = jPanelTitre.getEntree(); 
+					noteMembre = jPanelNote.getEntree();
+					commentaireMembre = jScrollPaneCommentaire.getTexte();
+					if (type.equals("livre"))
+						metier.reviewOpinionBook(pseudoMembre, passwordMembre, pseudoCommentaryAuthor, titreLivre, new Float(noteMembre), commentaireMembre);
+					if (type.equals("film"))
+						metier.reviewOpinionFilm(pseudoMembre, passwordMembre, pseudoCommentaryAuthor, titreLivre, new Float(noteMembre), commentaireMembre);
 
 				}
 				catch (Exception exception) {

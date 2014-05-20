@@ -23,7 +23,7 @@ public class Book extends Item {
 
 	public String toString(){
 
-		return "Film :" +title+ " genre :" +genre+ " author:" +author+ " number pages :" +nbPages+ " average rating :" +average();
+		return "Book :" +title+ " genre :" +genre+ " author:" +author+ " number pages :" +nbPages+ " average rating :" +average();
 	}
 
 	public static void main(String[] args){

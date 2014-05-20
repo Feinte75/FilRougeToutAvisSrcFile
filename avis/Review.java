@@ -59,6 +59,16 @@ public class Review {
 		
 		opinionsReview.add(r);
 	}
+	
+	public float getAverageOpinionRating(){
+		
+		float average = 0;
+		
+		for(Review r : opinionsReview){
+			average += r.getRating();
+		}
+		return (average /= opinionsReview.size());
+	}
 
 	public float getRating(){
 		
@@ -69,6 +79,7 @@ public class Review {
 		
 		return item;
 	}
+	
 	public static void main(String[] args){
 
 	}
