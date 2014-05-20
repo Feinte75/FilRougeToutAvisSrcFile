@@ -38,10 +38,16 @@ public class Member {
 
 	/**
 	*/
-	public Member userExists(String pseudo, String password){
+	public Member authenticate(String pseudo, String password){
 
 		if(this.pseudo.equalsIgnoreCase(pseudo.trim()) && this.password.equals(password)) return this;
 		else return null;
+	}
+	
+	public Member userExists(String pseudo){
+		
+		if(this.pseudo.equalsIgnoreCase(pseudo.trim())) return this;
+		else return null;		
 	}
 	
 	/**
@@ -57,24 +63,26 @@ public class Member {
 		if (review != null) return review.modifyReview(commentary, rating);
 		else{
 			review = new Review(this, item, commentary, rating);
-			item.addReview(review);
 			reviews.add(review);
+			item.addReview(review);
 			return review;	
 		}
 	}
 	
 	public float getKarma(){
 		
-		float karma;
+		float karma = 0;
 		
 		for(Review r : reviews){
-			
+			karma += r.getAverageOpinionRating();
 		}
-		return 0;
+		karma /= reviews.size();
+		
+		return karma;
 	}
 	
 	/**
-	 * Test if a review from the member has already been done
+	 * Test if a review about the item has already been done by the member
 	 * @param item 
 	 * @return
 	 */
