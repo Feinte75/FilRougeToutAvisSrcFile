@@ -78,6 +78,7 @@ public class Member {
 		}
 		karma /= reviews.size();
 		
+		System.out.println("Karma = "+karma);
 		return karma;
 	}
 	

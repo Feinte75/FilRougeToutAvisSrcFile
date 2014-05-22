@@ -48,13 +48,17 @@ public abstract class Item {
 	public float average(){
 		
 		float av = 0;
+		float karmaWeight = 0;
 		
 		for(Review sum : reviews){
-			av += sum.getRating();
+			// Compute the rating of each reviews with the karma of their authors
+			av += (sum.getRating() * sum.getMember().getKarma());
+			// Save the total amount of karma of all members
+			karmaWeight += sum.getMember().getKarma();
 		}
-		av /= reviews.size();
+		// Divide by the total karma to make people with good karma more influent on the rating
+		av /= karmaWeight;
 		
 		return av;
 	}
-
 }

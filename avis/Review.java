@@ -59,15 +59,26 @@ public class Review {
 		
 		opinionsReview.add(r);
 	}
-	
+	/**
+	 * 
+	 * @return
+	 */
 	public float getAverageOpinionRating(){
 		
 		float average = 0;
 		
+		// Return best karma (1) if no opinion given on the review yet
+		if(opinionsReview == null) return 1;
+		
 		for(Review r : opinionsReview){
-			average += r.getRating();
+			average += r.rating;
 		}
-		return (average /= opinionsReview.size());
+		// Divide by the number of reviews
+		average /= opinionsReview.size();
+		
+		// Normalize by 5 to get a karma between 0 and 1
+		average /= 5;
+		return average;
 	}
 
 	public float getRating(){
@@ -78,6 +89,11 @@ public class Review {
 	public Item getItem(){
 		
 		return item;
+	}
+	
+	public Member getMember(){
+		
+		return member;
 	}
 	
 	public static void main(String[] args){

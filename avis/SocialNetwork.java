@@ -373,7 +373,7 @@ public class SocialNetwork {
 		
 		// Find the item book
 		Item item = findItemBook(title);
-		if(item == null) throw new NotItem("");
+		if(item == null) throw new NotItem("Item doesn't exists");
 		
 		// Find if the review exists
 		Review review = memberCriticated.reviewAlreadyExists(item);
@@ -417,7 +417,7 @@ public class SocialNetwork {
 		
 		// Find the item book
 		Item item = findItemFilm(title);
-		if(item == null) throw new NotItem("");
+		if(item == null) throw new NotItem("Item doesn't exists");
 		
 		// Find if the review exists
 		Review review = memberCriticated.reviewAlreadyExists(item);
