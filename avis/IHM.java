@@ -722,6 +722,12 @@ public class IHM {
 			sn.addMember("Paul", "paul", "lecteur impulsif");
 			sn.addMember("Antoine", "antoine", "grand amoureux de littérature");
 			sn.addMember("Alice", "alice", "23 ans, sexy");
+			
+			sn.addItemBook("paul","paul","mobydick","aventure","Herman Melville", 822);
+			sn.addItemFilm("paul", "paul", "mobydick", "aventure", "John Huston", "Swashbuckler Films", 116);
+			
+			sn.reviewItemBook("paul", "paul", "mobydick", 5, "Genial !");
+			sn.reviewOpinionBook("antoine", "antoine", "paul", "mobydick", 5, "Totalement d'accord !");
 
 		}
 		catch (Exception e) {
