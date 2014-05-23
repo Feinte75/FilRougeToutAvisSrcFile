@@ -41,7 +41,6 @@ public class TestsReviewItemBook {
 			e.printStackTrace();
 			nbTestFail++;
 		}
-		
 	}
 
 	public static void reviewItemBookOkTest (SocialNetwork sn, String pseudo, String password, String titre, 

@@ -2,11 +2,6 @@ package test;
 
 import java.util.UUID;
 
-import exception.BadEntry;
-import exception.ItemBookAlreadyExists;
-import exception.MemberAlreadyExists;
-import exception.NotMember;
-
 import avis.SocialNetwork;
 
 public class TestRendement {
