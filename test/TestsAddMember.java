@@ -1,15 +1,8 @@
 package test;
 
-import java.util.LinkedList;
-
 import avis.SocialNetwork;
-
 import exception.BadEntry;
-import exception.ItemFilmAlreadyExists;
-import exception.ItemBookAlreadyExists;
 import exception.MemberAlreadyExists;
-import exception.NotItem;
-import exception.NotMember;
 
 /** 
  * @author B. Prou, E. Cousin
@@ -22,15 +15,6 @@ public class TestsAddMember {
 	public static int nbTestOk=0;
 	public static int nbTestFail=0;
 
-	/**
-	 * 
-	 * @param sn
-	 * @param pseudo
-	 * @param pwd
-	 * @param profil
-	 * @param idTest
-	 * @param messErreur
-	 */
 	public static void addMemberBadEntryTest (SocialNetwork sn, String pseudo, String pwd, String profil, String idTest, String messErreur){
 		
 		int nbMembres = sn.nbMembers();
@@ -46,14 +30,6 @@ public class TestsAddMember {
 		catch (Exception e) {System.out.println ("Test " + idTest + " : exception non prévue. " + e); e.printStackTrace();}
 	}
 	
-	/**
-	 * 
-	 * @param sn
-	 * @param pseudo
-	 * @param pwd
-	 * @param profil
-	 * @param idTest
-	 */
 	public static void addMemberOKTest (SocialNetwork sn, String pseudo, String pwd, String profil, String idTest){
 		int nbMembres = sn.nbMembers();
 		try{
@@ -68,15 +44,6 @@ public class TestsAddMember {
 		catch (Exception e) {System.out.println ("Test " + idTest + " : exception non prévue. " + e); e.printStackTrace();}
 	}
 
-	/**
-	 * 
-	 * @param sn
-	 * @param pseudo
-	 * @param pwd
-	 * @param profil
-	 * @param idTest
-	 * @param messErreur
-	 */
 	public static void addMemberAlreadyExistsTest (SocialNetwork sn, String pseudo, String pwd, String profil, String idTest, String messErreur){
 		int nbMembres = sn.nbMembers();
 		try {
@@ -90,9 +57,6 @@ public class TestsAddMember {
 		}
 		catch (Exception e) {System.out.println ("Test " + idTest + " : exception non prévue. " + e); e.printStackTrace();}
 	}
-
-
-
 
 	public static void main(String[] args) {
 
@@ -140,9 +104,5 @@ public class TestsAddMember {
 		if (nbLivres != sn.nbBooks()) {
 			System.out.println("Erreur 3.12 :  le nombre de livres après utilisation de addMember a été modifié");				
 		}
-
-		// ce n'est pas du test, mais cela peut "rassurer"...
-		System.out.println(sn);
-
 	}
 }

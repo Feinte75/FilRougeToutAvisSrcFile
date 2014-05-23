@@ -2,37 +2,25 @@ package avis;
 
 import java.util.LinkedList;
 
-
 public class Review {
 
-	/**
-	 * @uml.property  name="rating"
-	 */
 	private float rating;
-	/**
-	 * @uml.property  name="commentary"
-	 */
+
 	private String commentary;
-	/**
-	 * @uml.property  name="member"
-	 * @uml.associationEnd  multiplicity="(1 1)" inverse="reviews:avis.Member"
-	 */
+	
 	private Member member = null;
-	/** 
-	 * @uml.property name="item"
-	 * @uml.associationEnd multiplicity="(1 1)" inverse="reviews:avis.Item"
-	 */
+	
 	private Item item = null;
 	
-	/** 
-	 * @uml.property name="review2"
-	 * @uml.associationEnd multiplicity="(0 -1)" dimension="1" ordering="true" inverse="review1:avis.Review"
-	 */
 	private LinkedList<Review> opinionsReview;
-		
+	
 	/**
+	 * Constructor
+	 * @param member
+	 * @param item
+	 * @param commentary
+	 * @param rating
 	 */
-		
 	public Review(Member member, Item item, String commentary, float rating){
 		
 		this.rating = rating;
@@ -42,10 +30,10 @@ public class Review {
 	}
 	
 	/**
-	 * Modify and existing review
+	 * Modify an existing review
 	 * @param commentary New commentary
 	 * @param rating New rating
-	 * @return 
+	 * @return The modified review
 	 */
 	public Review modifyReview(String commentary, float rating){
 		this.commentary = commentary;
@@ -53,31 +41,34 @@ public class Review {
 		return this;
 	}
 	
+	/**
+	 * Add a new opinion to this review
+	 * @param r the opinion to add
+	 */
 	public void addOpinion(Review r){
-		
+
 		if(opinionsReview == null) opinionsReview = new LinkedList<Review>();
 		
 		opinionsReview.add(r);
 	}
+	
 	/**
-	 * 
-	 * @return
+	 * Computes the average opinion rating on this review
+	 * @return the average opinion rating
 	 */
 	public float getAverageOpinionRating(){
 		
 		float average = 0;
 		
-		// Return best karma (1) if no opinion given on the review yet
-		if(opinionsReview == null) return 1;
+		// Return best rating if no opinion given on the review yet
+		if(opinionsReview == null) return 5;
 		
 		for(Review r : opinionsReview){
 			average += r.rating;
 		}
 		// Divide by the number of reviews
 		average /= opinionsReview.size();
-		
-		// Normalize by 5 to get a karma between 0 and 1
-		average /= 5;
+	
 		return average;
 	}
 

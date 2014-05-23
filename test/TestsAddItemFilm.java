@@ -11,19 +11,6 @@ public class TestsAddItemFilm {
 	public static int nbTestOk=0;
 	public static int nbTestFail=0;
 
-	/**
-	 * 
-	 * @param sn
-	 * @param pseudo
-	 * @param password
-	 * @param titre
-	 * @param genre
-	 * @param realisateur
-	 * @param scenariste
-	 * @param duree
-	 * @param idTest
-	 * @param messErreur
-	 */
 	public static void addItemFilmBadEntryTest(SocialNetwork sn, String pseudo, String password, String titre, 
 			String genre, String realisateur, String scenariste, int duree, String idTest, String messErreur){
 
@@ -49,18 +36,6 @@ public class TestsAddItemFilm {
 
 	}
 	
-	/**
-	 * 
-	 * @param sn
-	 * @param pseudo
-	 * @param password
-	 * @param titre
-	 * @param genre
-	 * @param realisateur
-	 * @param scenariste
-	 * @param duree
-	 * @param idTest
-	 */
 	public static void addItemFilmOKTest (SocialNetwork sn, String pseudo, String password, String titre, String genre, String realisateur, String scenariste, int duree, String idTest){
 		int nbFilms = sn.nbFilms();
 		try{
@@ -79,19 +54,6 @@ public class TestsAddItemFilm {
 		}
 	}
 	
-	/**
-	 * 
-	 * @param sn
-	 * @param pseudo
-	 * @param password
-	 * @param titre
-	 * @param genre
-	 * @param realisateur
-	 * @param scenariste
-	 * @param duree
-	 * @param idTest
-	 * @param messErreur
-	 */
 	public static void addItemFilmAlreadyExistsTest (SocialNetwork sn, String pseudo, String password, String titre, String genre, String realisateur, String scenariste, int duree, String idTest, String messErreur){
 		int nbFilms = sn.nbFilms();
 		try {
@@ -113,20 +75,7 @@ public class TestsAddItemFilm {
 			nbTestFail++;
 		}
 	}
-	
-	/**
-	 * 
-	 * @param sn
-	 * @param pseudo
-	 * @param password
-	 * @param titre
-	 * @param genre
-	 * @param realisateur
-	 * @param scenariste
-	 * @param duree
-	 * @param idTest
-	 * @param messErreur
-	 */
+
 	public static void addItemFilmNotMember (SocialNetwork sn, String pseudo, String password, String titre, String genre, String realisateur, String scenariste, int duree, String idTest, String messErreur){
 		int nbFilms = sn.nbFilms();
 		try{

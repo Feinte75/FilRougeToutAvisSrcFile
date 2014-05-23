@@ -21,131 +21,54 @@ import java.util.LinkedList;
  */
 public class IHM {
 
-	/**
-	 * @uml.property  name="metier"
-	 * @uml.associationEnd  
-	 */
 	private SocialNetwork metier = null;
 
-
-
-	/**
-	 * @uml.property  name="largeurFenetre"
-	 */
 	private int largeurFenetre = 600;
 
-	/**
-	 * @uml.property  name="pseudoMembre"
-	 */
 	private String pseudoMembre = "";
-	/**
-	 * @uml.property  name="passwordMembre"
-	 */
+
 	private String passwordMembre = "";
-	/**
-	 * @uml.property  name="profilMembre"
-	 */
+
 	private String profilMembre = "";
 	
 	private String pseudoCommentaryAuthor = "";
 	
-	/**
-	 * @uml.property  name="titreLivre"
-	 */
 	String titreLivre;
-	/**
-	 * @uml.property  name="genreLivre"
-	 */
+
 	String genreLivre;
-	/**
-	 * @uml.property  name="auteurLivre"
-	 */
+
 	String auteurLivre;
-	/**
-	 * @uml.property  name="nbPagesLivre"
-	 */
+
 	String nbPagesLivre;
 
-	/**
-	 * @uml.property  name="titreFilm"
-	 */
 	String titreFilm;
-	/**
-	 * @uml.property  name="genreFilm"
-	 */
+	
 	String genreFilm;
-	/**
-	 * @uml.property  name="realisateurFilm"
-	 */
-	String realisateurFilm;
-	/**
-	 * @uml.property  name="scenaristeFilm"
-	 */
-	String scenaristeFilm;
-	/**
-	 * @uml.property  name="dureeFilm"
-	 */
-	String dureeFilm;
 
-	/**
-	 * @uml.property  name="commentaireMembre"
-	 */
+	String realisateurFilm;
+
+	String scenaristeFilm;
+
+	String dureeFilm;
+	
 	String commentaireMembre;
-	/**
-	 * @uml.property  name="noteMembre"
-	 */
+
 	String noteMembre;
 
-	/**
-	 * @uml.property  name="films" multiplicity="(0 -1)" dimension="1"
-	 */
-	private String [] films = new String[0];
-	/**
-	 * @uml.property  name="livres" multiplicity="(0 -1)" dimension="1"
-	 */
-	private String [] livres = new String[0];
-
-	/**
-	 * @uml.property  name="fenetreInteraction"
-	 * @uml.associationEnd  multiplicity="(1 1)"
-	 */
 	private JFrame fenetreInteraction;
-	/**
-	 * @uml.property  name="barreMenu"
-	 * @uml.associationEnd  multiplicity="(1 1)"
-	 */
+
 	private JMenuBar barreMenu;
-	/**
-	 * @uml.property  name="menuMembre"
-	 * @uml.associationEnd  multiplicity="(1 1)"
-	 */
+
 	private JMenu menuMembre;
-	/**
-	 * @uml.property  name="menuVisiteur"
-	 * @uml.associationEnd  multiplicity="(1 1)"
-	 */
+	
 	private JMenu menuVisiteur;
-	
-	/**
-	 * @uml.property  name="fenetreAffichageReseau"
-	 * @uml.associationEnd  
-	 */
+
 	private JFrame fenetreAffichageReseau;
-	/**
-	 * @uml.property  name="jScrollPaneAffichageReseau"
-	 * @uml.associationEnd  
-	 */
-	private JScrollPaneTexte jScrollPaneAffichageReseau;
 	
-	/**
-	 * @uml.property  name="fenetreAffichageItems"
-	 * @uml.associationEnd  
-	 */
+	private JScrollPaneTexte jScrollPaneAffichageReseau;
+
 	private JFrame fenetreAffichageItems;
-	/**
-	 * @uml.property  name="jScrollPaneAffichageItems"
-	 * @uml.associationEnd  
-	 */
+
 	private JScrollPaneTexte jScrollPaneAffichageItems;
 
 

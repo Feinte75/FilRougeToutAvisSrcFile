@@ -1,25 +1,15 @@
 package avis;
 
-import java.util.LinkedList;
-
-
 public class Film extends Item {
 
-	/**
-	 * @uml.property  name="filmMaker"
-	 */
 	private String filmMaker;
-	/**
-	 * @uml.property  name="scriptWriter"
-	 */
+
 	private String scriptWriter;
-	/**
-	 * @uml.property  name="length"
-	 */
+
 	private int length;
 	
 	/**
-	 * 
+	 * Constructor
 	 * @param title
 	 * @param genre
 	 * @param filmMaker
@@ -39,10 +29,7 @@ public class Film extends Item {
 		return "Film :" +title+ " genre :" +genre+ " film maker :" +filmMaker+ " script writer :" +scriptWriter+ " length :" +length+ " average rating :" +average();
 	}
 	
-	/**
-	*/
 	public static void main(String[] main){
 		
 	}
-	
 }

@@ -3,13 +3,10 @@ package test;
 
 
 import avis.SocialNetwork;
-
 import exception.BadEntry;
-import exception.ItemFilmAlreadyExists;
-import exception.ItemBookAlreadyExists;
-import exception.MemberAlreadyExists;
 import exception.NotItem;
 import exception.NotMember;
+import exception.NotReview;
 
 public class TestsReviewOpinion {
 
@@ -64,12 +61,12 @@ public class TestsReviewOpinion {
 			nbTestFail++;
 		}
 		catch (NotMember e){
-			nbTestFail++;
+			nbTestOk++;
 		}
 		catch (Exception e){
 			System.out.println ("Test " + idTest + " : exception non prï¿½vue. " + e);
 			e.printStackTrace();
-			nbTestOk++;
+			nbTestFail++;
 		}
 
 		try {
@@ -85,7 +82,37 @@ public class TestsReviewOpinion {
 			e.printStackTrace();
 			nbTestFail++;
 		}
+	}
+	
+	public static void reviewOpinionNotReviewTest(SocialNetwork sn, String pseudo, String password, String commentaryAuthor, String title, String commentary, float rating, String idTest, String messErreur){
+		
+		try{
+			sn.reviewOpinionFilm(pseudo, password, commentaryAuthor, title, rating, commentary);
+			System.out.println ("Test " + idTest+ ": " + messErreur);
+			nbTestFail++;
+		}
+		catch (NotReview e){
+			nbTestOk++;
+		}
+		catch (Exception e){
+			System.out.println ("Test " + idTest + " : exception non prï¿½vue. " + e);
+			e.printStackTrace();
+			nbTestFail++;
+		}
 
+		try {
+			sn.reviewOpinionBook(pseudo, password, commentaryAuthor, title, rating, commentary);
+			System.out.println ("Test " + idTest + " : " + messErreur);
+			nbTestFail++;
+		}
+		catch (NotReview e) {
+			nbTestOk++;
+		}
+		catch (Exception e) {
+			System.out.println ("Test " + idTest + " : exception non prévue. " + e);
+			e.printStackTrace();
+			nbTestFail++;
+		}
 	}
 
 	public static void reviewOpinionOkTest(SocialNetwork sn, String pseudo, String password, String commentaryAuthor, String title, String commentary, float rating, String idTest, String messErreur){
@@ -96,22 +123,23 @@ public class TestsReviewOpinion {
 
 		try{
 			sn.reviewOpinionFilm(pseudo, password, commentaryAuthor, title, rating, commentary);
-			nbTestFail++;
+			
+			nbTestOk++;
 		}
 		catch (Exception e) {
 			System.out.println ("Test " + idTest + " : exception non prévue. " + e);
 			e.printStackTrace();
-			nbTestOk++;
+			nbTestFail++;
 		}
 
 		try{
 			sn.reviewOpinionBook(pseudo, password, commentaryAuthor, title, rating, commentary);
-			nbTestFail++;
+			nbTestOk++;
 		}
 		catch (Exception e) {
 			System.out.println ("Test " + idTest + " : exception non prévue. " + e);
 			e.printStackTrace();
-			nbTestOk++;
+			nbTestFail++;
 		}
 	}
 
@@ -120,29 +148,29 @@ public class TestsReviewOpinion {
 		try {
 			sn.reviewOpinionFilm(pseudo, password, commentaryAuthor, title, rating, commentary);
 			System.out.println ("Test " + idTest + " : " + messErreur);
-			nbTestOk++;
+			nbTestFail++;
 		}
 		catch (NotItem e) {
-			nbTestFail++;
+			nbTestOk++;
 		}
 		catch (Exception e) {
 			System.out.println ("Test " + idTest + " : exception non prï¿½vue. " + e); 
 			e.printStackTrace();
-			nbTestOk++;
+			nbTestFail++;
 		}
 
 		try {
 			sn.reviewOpinionBook(pseudo, password, commentaryAuthor, title, rating, commentary);
 			System.out.println ("Test " + idTest + " : " + messErreur);
-			nbTestOk++;
+			nbTestFail++;
 		}
 		catch (NotItem e) {
-			nbTestFail++;
+			nbTestOk++;
 		}
 		catch (Exception e) {
 			System.out.println ("Test " + idTest + " : exception non prï¿½vue. " + e); 
 			e.printStackTrace();
-			nbTestOk++;
+			nbTestFail++;
 		}
 	}
 
@@ -154,6 +182,8 @@ public class TestsReviewOpinion {
 		int nbLivres = 0;
 		int nbFilms = 0;
 
+		System.out.println("Tests  ajouter des opinions aux reviews du reseau social  ");
+		
 		// tests de TestsReviewOpinion
 		nbFilms = sn.nbFilms();
 		nbMembres = sn.nbMembers();
@@ -188,11 +218,8 @@ public class TestsReviewOpinion {
 			System.out.println("Test ReviewOpinion échoué : Exception non prevue : Revoir methodes dans le bloc try");
 		}
 
-		//tentative d'ajout d'une opinion alors que le film est "inexistant"
+		//tentative d'ajout d'une opinion sur un item livre et sur un item book alors que le film et le livre sont "inexistants"
 		reviewOpinionNotItemTest (sn, "test","1234", "inconnu", "film", "Cool", 2.2f, "7.15", "L'ajout d'une opinion pour un film inexistant est accepte");
-
-		//tentative d'ajout d'une opinion alors que le livre est "inexistant"
-		reviewOpinionNotItemTest (sn, "test","1234", "inconnu", "book", "Cool", 2.2f, "7.16", "L'ajout d'une opinion pour un livre inexistant est accepte");
 
 		//ajout d'un film et d'un livre de même titre pour tester les deux méthodes
 		try {
@@ -204,10 +231,15 @@ public class TestsReviewOpinion {
 			System.out.println("Test ReviewOpinion échoué : Exception non prevue : Revoir methodes dans le bloc try");
 		}
 		
+		//tentative d'ajout d'une opinion alors que la review est "inexistante"
+		reviewOpinionNotReviewTest (sn, "test","1234", "inconnu", "Le seigneur des anneaux", "Cool", 2.2f, "7.15", "L'ajout d'une opinion sur une review inexistante est accepte");
+		
 		//ajout d'une review film et livre
 		try{
-			sn.reviewItemFilm("test", "1234", "Le seigneur des anneaux", 5, "Good");
-			sn.reviewItemBook("test", "1234", "Le seigneur des anneaux", 5, "Good");
+			// 2 reviews a 4
+			sn.reviewItemFilm("test", "1234", "Le seigneur des anneaux", 4, "Good");
+			sn.reviewItemBook("test", "1234", "Le seigneur des anneaux", 4, "Good");
+		
 		} catch (Exception e){
 			
 			e.printStackTrace();
@@ -219,12 +251,8 @@ public class TestsReviewOpinion {
 		nbLivres=sn.nbBooks();
 
 		// tentative d'ajout d'avis sur un film avec entrees "correctes"	
-		//Test avec ajout d'une opinion sur un film
-		reviewOpinionOkTest (sn, "inconnu","1234","test", "Le seigneur des anneaux", "Pas d'accord", 0, "7.17", "L'ajout d'une opinion sur un film est OK");
-
-		//Test avec ajout d'une rating sur l' opinion sur un film
-		reviewOpinionOkTest (sn, "inconnu","1234","test","Le seigneur des anneaux", "Pas d'accord", 0, "7.18", "L'ajout d'une opinion sur un livre est OK");
-
+		// Test avec ajout d'une opinion sur un film et un book
+		reviewOpinionOkTest (sn, "inconnu","1234","test", "Le seigneur des anneaux", "D'accord", 4, "7.17", "L'ajout d'une opinion sur un film est OK");
 
 		if (nbMembres != sn.nbMembers()) {
 			System.out.println("Erreur 7.19 :  le nombre de membres apres utilisation de reviewOpinion a ete modifie");
@@ -235,8 +263,5 @@ public class TestsReviewOpinion {
 		if (nbLivres != sn.nbBooks()) {
 			System.out.println("Erreur 7.21 :  le nombre de livres apres utilisation de reviewOpinion a ete modifie");   			 
 		}
-
-		// Permet d'afficher le nombre d'echec et reussite.
-		System.out.println("Nombre d'echec :  "+ nbTestOk +"\nNombre de reussite :  " + nbTestFail);
 	}
 }
