@@ -21,14 +21,14 @@ public class TestsAddItemBook {
 		}
 		catch (BadEntry e) {
 			if (sn.nbBooks() != nbBooks) {
-				System.out.println("Test " + idTest + " : l'exception BadEntry a bien été levée mais le nombre de livres a été modifié");
+				System.out.println("Test " + idTest + " : BadEntry exception has been fired but nbBooks has changed");
 				nbTestFail++;
 				return;
 			}
 			nbTestOk++;
 		}
 		catch (Exception e) {
-			System.out.println ("Test " + idTest + " : exception non prÃ©vue. " + e);
+			System.out.println ("Test " + idTest + " : exception non prévue. " + e);
 			e.printStackTrace();
 			nbTestFail++;
 		}

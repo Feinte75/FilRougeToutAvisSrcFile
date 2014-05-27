@@ -129,17 +129,6 @@ public class IHM {
 		fenetreInteraction.setVisible(true);
 	}
 
-
-
-
-
-
-
-	/**
-	 * Setter of the property <tt>metier</tt>
-	 * @param metier  The metier to set.
-	 * @uml.property  name="metier"
-	 */
 	public void setMetier(SocialNetwork metier) {
 		this.metier = metier;
 	}
@@ -169,17 +158,10 @@ public class IHM {
 
 	}
 
-
-
-	/**
-	 * @author  feinte
-	 */
 	private class ConsultItem implements ActionListener {
-		/**
-		 * @uml.property  name="jPanelNameItem"
-		 * @uml.associationEnd  
-		 */
+		
 		JPanelEntree jPanelNameItem;
+		
 		public void actionPerformed(ActionEvent e) {
 			JPanel consulterItem = new JPanel();
 			consulterItem.setLayout(new GridLayout(2,1, 4, 4));
@@ -231,27 +213,12 @@ public class IHM {
 
 	}
 
-
-
-	/**
-	 * @author  feinte
-	 */
 	private class AddMember implements ActionListener {
-		/**
-		 * @uml.property  name="jPanelPseudo"
-		 * @uml.associationEnd  
-		 */
+		
 		JPanelEntree jPanelPseudo;
-		/**
-		 * @uml.property  name="jPanelPassword"
-		 * @uml.associationEnd  
-		 */
 		JPanelEntree jPanelPassword;
-		/**
-		 * @uml.property  name="jScrollPaneProfil"
-		 * @uml.associationEnd  
-		 */
 		JScrollPaneTexte jScrollPaneProfil;
+		
 		public void actionPerformed(ActionEvent e) {
 			JPanel inscrireMembre = new JPanel();
 			jScrollPaneProfil = new JScrollPaneTexte(" profil du membre ? ",  profilMembre, true, largeurFenetre);
@@ -292,43 +259,14 @@ public class IHM {
 		}
 	}
 
-
-
-
-	/**
-	 * @author  feinte
-	 */
 	private class AddItemBook implements ActionListener {
-		/**
-		 * @uml.property  name="jPanelPseudo"
-		 * @uml.associationEnd  
-		 */
 		JPanelEntree jPanelPseudo;
-		/**
-		 * @uml.property  name="jPanelPassword"
-		 * @uml.associationEnd  
-		 */
 		JPanelPassword jPanelPassword;
-		/**
-		 * @uml.property  name="jPanelTitre"
-		 * @uml.associationEnd  
-		 */
 		JPanelEntree jPanelTitre;
-		/**
-		 * @uml.property  name="jPanelGenre"
-		 * @uml.associationEnd  
-		 */
 		JPanelEntree jPanelGenre;
-		/**
-		 * @uml.property  name="jPanelAuteur"
-		 * @uml.associationEnd  
-		 */
 		JPanelEntree jPanelAuteur;
-		/**
-		 * @uml.property  name="jPanelNombrePages"
-		 * @uml.associationEnd  
-		 */
 		JPanelEntree jPanelNombrePages;
+		
 		public void actionPerformed(ActionEvent e) {
 			JPanel ajouterLivre = new JPanel();
 			ajouterLivre.setLayout(new GridLayout(7,1, 4, 4));
@@ -376,46 +314,16 @@ public class IHM {
 		}
 	}
 
-
-	/**
-	 * @author  feinte
-	 */
 	private class AddItemFilm implements ActionListener {
-		/**
-		 * @uml.property  name="jPanelPseudo"
-		 * @uml.associationEnd  
-		 */
+
 		JPanelEntree jPanelPseudo;
-		/**
-		 * @uml.property  name="jPanelPassword"
-		 * @uml.associationEnd  
-		 */
 		JPanelPassword jPanelPassword;
-		/**
-		 * @uml.property  name="jPanelTitre"
-		 * @uml.associationEnd  
-		 */
 		JPanelEntree jPanelTitre;
-		/**
-		 * @uml.property  name="jPanelGenre"
-		 * @uml.associationEnd  
-		 */
 		JPanelEntree jPanelGenre;
-		/**
-		 * @uml.property  name="jPanelRealisateur"
-		 * @uml.associationEnd  
-		 */
 		JPanelEntree jPanelRealisateur;
-		/**
-		 * @uml.property  name="jPanelScenariste"
-		 * @uml.associationEnd  
-		 */
 		JPanelEntree jPanelScenariste;
-		/**
-		 * @uml.property  name="jPanelNombrePages"
-		 * @uml.associationEnd  
-		 */
 		JPanelEntree jPanelNombrePages;
+		
 		public void actionPerformed(ActionEvent e) {
 			JPanel ajouterFilm = new JPanel();
 			ajouterFilm.setLayout(new GridLayout(7,1, 4, 4));
@@ -466,37 +374,12 @@ public class IHM {
 		}
 	}
 
-
-
-
-	/**
-	 * @author  feinte
-	 */
 	private class ReviewItem   implements ActionListener {
-		/**
-		 * @uml.property  name="jPanelPseudo"
-		 * @uml.associationEnd  
-		 */
+		
 		JPanelEntree jPanelPseudo;
-		/**
-		 * @uml.property  name="jPanelPassword"
-		 * @uml.associationEnd  
-		 */
 		JPanelPassword jPanelPassword;
-		/**
-		 * @uml.property  name="jPanelTitre"
-		 * @uml.associationEnd  
-		 */
 		JPanelEntree jPanelTitre;
-		/**
-		 * @uml.property  name="jPanelNote"
-		 * @uml.associationEnd  
-		 */
 		JPanelEntree jPanelNote;
-		/**
-		 * @uml.property  name="jScrollPaneCommentaire"
-		 * @uml.associationEnd  
-		 */
 		JScrollPaneTexte jScrollPaneCommentaire;
 
 		String type;

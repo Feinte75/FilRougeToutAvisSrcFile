@@ -5,9 +5,7 @@ import java.util.LinkedList;
 public class Member {
 
 	private String pseudo;
-	
 	private String password;
-	
 	private String profile;
 	
 	private LinkedList<Review> reviews;

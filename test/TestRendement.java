@@ -9,12 +9,6 @@ public class TestRendement {
 	private static int nbMembers=500;
 	private static int nbItems=5000;
 	
-	/*public TestRendement(int nbMembers, int nbItems){
-		
-		this.nbMembers = nbMembers;
-		this.nbItems = nbItems;
-	}*/
-	
 	public static void generateMembers(SocialNetwork sn){
 		
 		String pseudo;

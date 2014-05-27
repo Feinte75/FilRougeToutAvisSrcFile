@@ -27,7 +27,7 @@ public class TestsAddMember {
 			if (sn.nbMembers() != nbMembres) System.out.println("Test " + idTest + " : l'exception BadEntry a bien été levée mais le nombre de membres a été modifié");
 			nbTestOk++;
 		}
-		catch (Exception e) {System.out.println ("Test " + idTest + " : exception non prévue. " + e); e.printStackTrace();}
+		catch (Exception e) {System.out.println ("Test " + idTest + " : exception non pr�vue. " + e); e.printStackTrace();}
 	}
 	
 	public static void addMemberOKTest (SocialNetwork sn, String pseudo, String pwd, String profil, String idTest){
