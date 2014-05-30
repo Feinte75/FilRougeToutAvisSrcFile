@@ -21,131 +21,54 @@ import java.util.LinkedList;
  */
 public class IHM {
 
-	/**
-	 * @uml.property  name="metier"
-	 * @uml.associationEnd  
-	 */
 	private SocialNetwork metier = null;
 
-
-
-	/**
-	 * @uml.property  name="largeurFenetre"
-	 */
 	private int largeurFenetre = 600;
 
-	/**
-	 * @uml.property  name="pseudoMembre"
-	 */
 	private String pseudoMembre = "";
-	/**
-	 * @uml.property  name="passwordMembre"
-	 */
+
 	private String passwordMembre = "";
-	/**
-	 * @uml.property  name="profilMembre"
-	 */
+
 	private String profilMembre = "";
 	
 	private String pseudoCommentaryAuthor = "";
 	
-	/**
-	 * @uml.property  name="titreLivre"
-	 */
 	String titreLivre;
-	/**
-	 * @uml.property  name="genreLivre"
-	 */
+
 	String genreLivre;
-	/**
-	 * @uml.property  name="auteurLivre"
-	 */
+
 	String auteurLivre;
-	/**
-	 * @uml.property  name="nbPagesLivre"
-	 */
+
 	String nbPagesLivre;
 
-	/**
-	 * @uml.property  name="titreFilm"
-	 */
 	String titreFilm;
-	/**
-	 * @uml.property  name="genreFilm"
-	 */
+	
 	String genreFilm;
-	/**
-	 * @uml.property  name="realisateurFilm"
-	 */
-	String realisateurFilm;
-	/**
-	 * @uml.property  name="scenaristeFilm"
-	 */
-	String scenaristeFilm;
-	/**
-	 * @uml.property  name="dureeFilm"
-	 */
-	String dureeFilm;
 
-	/**
-	 * @uml.property  name="commentaireMembre"
-	 */
+	String realisateurFilm;
+
+	String scenaristeFilm;
+
+	String dureeFilm;
+	
 	String commentaireMembre;
-	/**
-	 * @uml.property  name="noteMembre"
-	 */
+
 	String noteMembre;
 
-	/**
-	 * @uml.property  name="films" multiplicity="(0 -1)" dimension="1"
-	 */
-	private String [] films = new String[0];
-	/**
-	 * @uml.property  name="livres" multiplicity="(0 -1)" dimension="1"
-	 */
-	private String [] livres = new String[0];
-
-	/**
-	 * @uml.property  name="fenetreInteraction"
-	 * @uml.associationEnd  multiplicity="(1 1)"
-	 */
 	private JFrame fenetreInteraction;
-	/**
-	 * @uml.property  name="barreMenu"
-	 * @uml.associationEnd  multiplicity="(1 1)"
-	 */
+
 	private JMenuBar barreMenu;
-	/**
-	 * @uml.property  name="menuMembre"
-	 * @uml.associationEnd  multiplicity="(1 1)"
-	 */
+
 	private JMenu menuMembre;
-	/**
-	 * @uml.property  name="menuVisiteur"
-	 * @uml.associationEnd  multiplicity="(1 1)"
-	 */
+	
 	private JMenu menuVisiteur;
-	
-	/**
-	 * @uml.property  name="fenetreAffichageReseau"
-	 * @uml.associationEnd  
-	 */
+
 	private JFrame fenetreAffichageReseau;
-	/**
-	 * @uml.property  name="jScrollPaneAffichageReseau"
-	 * @uml.associationEnd  
-	 */
-	private JScrollPaneTexte jScrollPaneAffichageReseau;
 	
-	/**
-	 * @uml.property  name="fenetreAffichageItems"
-	 * @uml.associationEnd  
-	 */
+	private JScrollPaneTexte jScrollPaneAffichageReseau;
+
 	private JFrame fenetreAffichageItems;
-	/**
-	 * @uml.property  name="jScrollPaneAffichageItems"
-	 * @uml.associationEnd  
-	 */
+
 	private JScrollPaneTexte jScrollPaneAffichageItems;
 
 
@@ -206,17 +129,6 @@ public class IHM {
 		fenetreInteraction.setVisible(true);
 	}
 
-
-
-
-
-
-
-	/**
-	 * Setter of the property <tt>metier</tt>
-	 * @param metier  The metier to set.
-	 * @uml.property  name="metier"
-	 */
 	public void setMetier(SocialNetwork metier) {
 		this.metier = metier;
 	}
@@ -246,17 +158,10 @@ public class IHM {
 
 	}
 
-
-
-	/**
-	 * @author  feinte
-	 */
 	private class ConsultItem implements ActionListener {
-		/**
-		 * @uml.property  name="jPanelNameItem"
-		 * @uml.associationEnd  
-		 */
+		
 		JPanelEntree jPanelNameItem;
+		
 		public void actionPerformed(ActionEvent e) {
 			JPanel consulterItem = new JPanel();
 			consulterItem.setLayout(new GridLayout(2,1, 4, 4));
@@ -308,27 +213,12 @@ public class IHM {
 
 	}
 
-
-
-	/**
-	 * @author  feinte
-	 */
 	private class AddMember implements ActionListener {
-		/**
-		 * @uml.property  name="jPanelPseudo"
-		 * @uml.associationEnd  
-		 */
+		
 		JPanelEntree jPanelPseudo;
-		/**
-		 * @uml.property  name="jPanelPassword"
-		 * @uml.associationEnd  
-		 */
 		JPanelEntree jPanelPassword;
-		/**
-		 * @uml.property  name="jScrollPaneProfil"
-		 * @uml.associationEnd  
-		 */
 		JScrollPaneTexte jScrollPaneProfil;
+		
 		public void actionPerformed(ActionEvent e) {
 			JPanel inscrireMembre = new JPanel();
 			jScrollPaneProfil = new JScrollPaneTexte(" profil du membre ? ",  profilMembre, true, largeurFenetre);
@@ -369,43 +259,14 @@ public class IHM {
 		}
 	}
 
-
-
-
-	/**
-	 * @author  feinte
-	 */
 	private class AddItemBook implements ActionListener {
-		/**
-		 * @uml.property  name="jPanelPseudo"
-		 * @uml.associationEnd  
-		 */
 		JPanelEntree jPanelPseudo;
-		/**
-		 * @uml.property  name="jPanelPassword"
-		 * @uml.associationEnd  
-		 */
 		JPanelPassword jPanelPassword;
-		/**
-		 * @uml.property  name="jPanelTitre"
-		 * @uml.associationEnd  
-		 */
 		JPanelEntree jPanelTitre;
-		/**
-		 * @uml.property  name="jPanelGenre"
-		 * @uml.associationEnd  
-		 */
 		JPanelEntree jPanelGenre;
-		/**
-		 * @uml.property  name="jPanelAuteur"
-		 * @uml.associationEnd  
-		 */
 		JPanelEntree jPanelAuteur;
-		/**
-		 * @uml.property  name="jPanelNombrePages"
-		 * @uml.associationEnd  
-		 */
 		JPanelEntree jPanelNombrePages;
+		
 		public void actionPerformed(ActionEvent e) {
 			JPanel ajouterLivre = new JPanel();
 			ajouterLivre.setLayout(new GridLayout(7,1, 4, 4));
@@ -453,46 +314,16 @@ public class IHM {
 		}
 	}
 
-
-	/**
-	 * @author  feinte
-	 */
 	private class AddItemFilm implements ActionListener {
-		/**
-		 * @uml.property  name="jPanelPseudo"
-		 * @uml.associationEnd  
-		 */
+
 		JPanelEntree jPanelPseudo;
-		/**
-		 * @uml.property  name="jPanelPassword"
-		 * @uml.associationEnd  
-		 */
 		JPanelPassword jPanelPassword;
-		/**
-		 * @uml.property  name="jPanelTitre"
-		 * @uml.associationEnd  
-		 */
 		JPanelEntree jPanelTitre;
-		/**
-		 * @uml.property  name="jPanelGenre"
-		 * @uml.associationEnd  
-		 */
 		JPanelEntree jPanelGenre;
-		/**
-		 * @uml.property  name="jPanelRealisateur"
-		 * @uml.associationEnd  
-		 */
 		JPanelEntree jPanelRealisateur;
-		/**
-		 * @uml.property  name="jPanelScenariste"
-		 * @uml.associationEnd  
-		 */
 		JPanelEntree jPanelScenariste;
-		/**
-		 * @uml.property  name="jPanelNombrePages"
-		 * @uml.associationEnd  
-		 */
 		JPanelEntree jPanelNombrePages;
+		
 		public void actionPerformed(ActionEvent e) {
 			JPanel ajouterFilm = new JPanel();
 			ajouterFilm.setLayout(new GridLayout(7,1, 4, 4));
@@ -543,37 +374,12 @@ public class IHM {
 		}
 	}
 
-
-
-
-	/**
-	 * @author  feinte
-	 */
 	private class ReviewItem   implements ActionListener {
-		/**
-		 * @uml.property  name="jPanelPseudo"
-		 * @uml.associationEnd  
-		 */
+		
 		JPanelEntree jPanelPseudo;
-		/**
-		 * @uml.property  name="jPanelPassword"
-		 * @uml.associationEnd  
-		 */
 		JPanelPassword jPanelPassword;
-		/**
-		 * @uml.property  name="jPanelTitre"
-		 * @uml.associationEnd  
-		 */
 		JPanelEntree jPanelTitre;
-		/**
-		 * @uml.property  name="jPanelNote"
-		 * @uml.associationEnd  
-		 */
 		JPanelEntree jPanelNote;
-		/**
-		 * @uml.property  name="jScrollPaneCommentaire"
-		 * @uml.associationEnd  
-		 */
 		JScrollPaneTexte jScrollPaneCommentaire;
 
 		String type;
@@ -722,12 +528,19 @@ public class IHM {
 			sn.addMember("Paul", "paul", "lecteur impulsif");
 			sn.addMember("Antoine", "antoine", "grand amoureux de littérature");
 			sn.addMember("Alice", "alice", "23 ans, sexy");
+			sn.addMember("Jacques", "Jacques", "dfgsdg");
+			sn.addMember("Jean", "Jean", "sdgsdg");
 			
 			sn.addItemBook("paul","paul","mobydick","aventure","Herman Melville", 822);
 			sn.addItemFilm("paul", "paul", "mobydick", "aventure", "John Huston", "Swashbuckler Films", 116);
 			
-			sn.reviewItemBook("paul", "paul", "mobydick", 5, "Genial !");
-			sn.reviewOpinionBook("antoine", "antoine", "paul", "mobydick", 5, "Totalement d'accord !");
+			sn.reviewItemBook("paul", "paul", "mobydick", 2, "Bof !");
+			
+			sn.reviewOpinionBook("antoine", "antoine", "paul", "mobydick", 0, "Pas d'accord !");
+			sn.reviewOpinionBook("Jacques", "Jacques", "paul", "mobydick", 5, "D'accord !");
+			sn.reviewOpinionBook("Jean", "Jean", "paul", "mobydick", 3f, "Mouai");
+			
+			sn.reviewItemBook("Alice", "alice", "mobydick", 5, "Great");
 
 		}
 		catch (Exception e) {

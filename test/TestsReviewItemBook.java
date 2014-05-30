@@ -6,6 +6,7 @@ import exception.NotItem;
 import exception.NotMember;
 
 public class TestsReviewItemBook {
+	
 	public static int nbTestOk=0;
 	public static int nbTestFail=0;
 
@@ -40,7 +41,6 @@ public class TestsReviewItemBook {
 			e.printStackTrace();
 			nbTestFail++;
 		}
-		
 	}
 
 	public static void reviewItemBookOkTest (SocialNetwork sn, String pseudo, String password, String titre, 

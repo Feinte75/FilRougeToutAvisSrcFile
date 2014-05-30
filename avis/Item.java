@@ -2,37 +2,36 @@ package avis;
 
 import java.util.LinkedList;
 
-
 public abstract class Item {
 
-	/**
-	 * @uml.property  name="title"
-	 */
 	protected String title;
-	/**
-	 * @uml.property  name="genre"
-	 */
+	
 	protected String genre;
-	/** 
-	 * @uml.property name="reviews"
-	 * @uml.associationEnd multiplicity="(0 -1)" inverse="item:avis.Review"
-	 */
+	
 	private LinkedList<Review> reviews;
 	
-	
+	/**
+	 * Constructor
+	 * @param title
+	 * @param genre
+	 */
 	public Item(String title, String genre){
 		
 		this.title = title;
 		this.genre = genre;
 		reviews = new LinkedList<Review>();
 	}
-
+	
+	/**
+	 * Add a review to the item
+	 * @param review
+	 */
 	public void addReview(Review review){
 		reviews.add(review);
 	}
 	
 	/**
-	 * 
+	 * Compare param title to attribute title
 	 * @param title the title of the item searched
 	 * @return the item if it is found, null either
 	 */
@@ -42,19 +41,23 @@ public abstract class Item {
 	}
 	
 	/**
-	 * calculate the average rating
-	 * @return the average rating
+	 * calculate the average rating taking into account the karma of the reviews authors
+	 * @return the average rating of the item
 	 */
 	public float average(){
 		
 		float av = 0;
+		float karmaWeight = 0;
 		
 		for(Review sum : reviews){
-			av += sum.getRating();
+			// Compute the rating of each reviews with the karma of their authors
+			av += (sum.getRating() * sum.getMember().getKarma());
+			// Save the total amount of karma for the members who reviewed the item
+			karmaWeight += sum.getMember().getKarma();
 		}
-		av /= reviews.size();
+		// Divide by the total karma to make people with good karma more influent on the rating
+		av /= karmaWeight;
 		
 		return av;
 	}
-
 }
