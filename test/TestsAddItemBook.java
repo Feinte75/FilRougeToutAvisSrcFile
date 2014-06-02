@@ -32,7 +32,6 @@ public class TestsAddItemBook {
 			e.printStackTrace();
 			nbTestFail++;
 		}
-
 	}
 
 	public static void addItemBookOKTest (SocialNetwork sn, String pseudo, String password, String titre, String genre, String auteur, int nbPages, String idTest){

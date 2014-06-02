@@ -11,12 +11,10 @@ public class TestRendement {
 	
 	public static void generateMembers(SocialNetwork sn){
 		
-		String pseudo;
 		for(int i = 0; i < nbMembers-1; i++){
-			// generate random string for pseudo
-			pseudo = UUID.randomUUID().toString();
+		
 			try {
-				sn.addMember(pseudo, "1234", "No profile");
+				sn.addMember(Integer.toString(i), "1234", "No profile");
 			} catch (Exception e) {
 				
 				e.printStackTrace();
@@ -33,11 +31,9 @@ public class TestRendement {
 			e.printStackTrace();
 		} 
 		
-		String title;
 		for(int i = 0; i < nbItems; i++){
-			title = UUID.randomUUID().toString();
 			try {
-				sn.addItemBook("Glenn", "1456", title, "Drame", "Max", 15);
+				sn.addItemBook("Glenn", "1456", Integer.toString(i), "Drame", "Max", 15);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
