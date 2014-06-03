@@ -188,9 +188,18 @@ public class TestsReviewOpinion {
 		nbFilms = sn.nbFilms();
 		nbMembres = sn.nbMembers();
 		nbLivres = sn.nbBooks();
+		
+		//ajout des membres
+		try {
+			sn.addMember("test", "1234", "bebe");
+			sn.addMember("inconnu", "1234", "baba");
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			System.out.println("Test ReviewOpinion échoué : Exception non prevue : Revoir methodes dans le bloc try");
+		}
 
-
-		// tentative d'ajout d'une opinion avec entrees "incorrectes"
+		// Utilisation de reviewOpinion avec paramètres d'entrée incorrect
 		reviewOpinionBadEntryTest(sn, null, "1234", "Glenn", "titre", "Cool", 2.2f, "7.1", "L'ajout d'une opinion dont le pseudo n'est pas instancie est accepte" );
 		reviewOpinionBadEntryTest(sn, " ", "1234", "Glenn", "titre", "Cool", 2.2f, "7.2", "L'ajout d'une opinion dont le pseudo n'est compose que d'espaces est accepte" );
 		reviewOpinionBadEntryTest(sn, "test", null,"Glenn", "titre", "Cool", 2.2f, "7.3", "L'ajout d'une opinion par un membre (pseudo) dont le password n'est pas instancie est accepte" );
@@ -203,23 +212,13 @@ public class TestsReviewOpinion {
 		reviewOpinionBadEntryTest(sn, "test", "1234", "Glenn", " ", "Cool", 2.2f, "7.11", "L'ajout d'une opinion dont le titre n'est compose que d'espaces est accepte" );
 		reviewOpinionBadEntryTest(sn, "test", "1234", "Glenn", "titre", null, 2.2f, "7.12", "L'ajout d'une opinion dont le commentaire n'est pas instancie est accepte" );
 		
+		// Utilisation de reviewOpinion avec en paramètre membre "inexistant"
+		reviewOpinionNotMemberTest(sn, "ABCDEFGHIJ","AZERTY", "Glenn", "Titre", "Cool", 2.2f, "7.13", "L'ajout d'une opinion alors que le membre n'existe pas est accepte");
+		reviewOpinionNotMemberTest(sn, "test","aaaa", "Glenn", "Titre", "Cool", 2.2f, "7.14", "L'ajout d'un commentaire avec mauvais login/pwd est accepté");
+		reviewOpinionNotMemberTest(sn, "ABCDEFGHIJ","AZERTY", "Glenn", "Titre", "Cool", 2.2f, "7.15", "L'ajout d'une opinion alors que le membre n'existe pas est accepte");
 
-
-		// tentative d'ajout d'une opinion alors que le membre est "inexistant"
-		reviewOpinionNotMemberTest(sn, "ABCDEFGHIJ","AZERTY", "Glenn", "Titre", "Cool", 2.2f, "7.14", "L'ajout d'une opinion alors que le membre n'existe pas est accepte");
-
-		//ajout des membres
-		try {
-			sn.addMember("test", "1234", "bebe");
-			sn.addMember("inconnu", "1234", "baba");
-		} catch (Exception e) {
-			
-			e.printStackTrace();
-			System.out.println("Test ReviewOpinion échoué : Exception non prevue : Revoir methodes dans le bloc try");
-		}
-
-		//tentative d'ajout d'une opinion sur un item livre et sur un item book alors que le film et le livre sont "inexistants"
-		reviewOpinionNotItemTest (sn, "test","1234", "inconnu", "film", "Cool", 2.2f, "7.15", "L'ajout d'une opinion pour un film inexistant est accepte");
+		// Utilisation de reviewOpinion avec en paramètre un item "inexistant"
+		reviewOpinionNotItemTest (sn, "test","1234", "inconnu", "film", "Cool", 2.2f, "7.16", "L'ajout d'une opinion pour un film inexistant est accepte");
 
 		//ajout d'un film et d'un livre de même titre pour tester les deux méthodes
 		try {
@@ -231,8 +230,8 @@ public class TestsReviewOpinion {
 			System.out.println("Test ReviewOpinion échoué : Exception non prevue : Revoir methodes dans le bloc try");
 		}
 		
-		//tentative d'ajout d'une opinion alors que la review est "inexistante"
-		reviewOpinionNotReviewTest (sn, "test","1234", "inconnu", "Le seigneur des anneaux", "Cool", 2.2f, "7.15", "L'ajout d'une opinion sur une review inexistante est accepte");
+		// Utilisation de reviewOpinion avec en paramètre une review "inexistante"
+		reviewOpinionNotReviewTest (sn, "test","1234", "inconnu", "Le seigneur des anneaux", "Cool", 2.2f, "7.17", "L'ajout d'une opinion sur une review inexistante est accepte");
 		
 		//ajout d'une review film et livre
 		try{
@@ -250,9 +249,9 @@ public class TestsReviewOpinion {
 		nbMembres=sn.nbMembers();
 		nbLivres=sn.nbBooks();
 
-		// tentative d'ajout d'avis sur un film avec entrees "correctes"	
+		// Utilisation de reviewOpinion avec paramètres d'entrée incorrects
 		// Test avec ajout d'une opinion sur un film et un book
-		reviewOpinionOkTest (sn, "inconnu","1234","test", "Le seigneur des anneaux", "D'accord", 4, "7.17", "L'ajout d'une opinion sur un film est OK");
+		reviewOpinionOkTest (sn, "inconnu","1234","test", "Le seigneur des anneaux", "D'accord", 4, "7.18", "L'ajout d'une opinion sur un film est OK");
 
 		if (nbMembres != sn.nbMembers()) {
 			System.out.println("Erreur 7.19 :  le nombre de membres apres utilisation de reviewOpinion a ete modifie");
