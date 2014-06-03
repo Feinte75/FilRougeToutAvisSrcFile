@@ -93,6 +93,7 @@ public class TestsReviewItemFilm {
 			System.out.println("Test reviewItemFilm échoué : Exception non prevue : Revoir methodes dans le bloc try");
 		}
 		
+		// Utilisation de reviewItemFilm avec paramètres d'entrée incorrects
 		reviewItemFilmBadEntryTest(sn, null, "abcd", "test", 4, "Pourri", "5.1", "L'ajout d'un commentaire par un membre dont le pseudo n'est pas instancié est accepté" );
 		reviewItemFilmBadEntryTest(sn, " ",  "abcd", "test", 4, "Pourri", "5.2", "L'ajout d'un commentaire par un membre dont le pseudo n'est composé que d'espaces est accepté" );
 		reviewItemFilmBadEntryTest(sn, "Jordan", null, "test", 4, "Pourri", "5.3", "L'ajout d'un commentaire par un membre dont le password n'est pas instancié est accepté" );
@@ -102,12 +103,15 @@ public class TestsReviewItemFilm {
 		reviewItemFilmBadEntryTest(sn, "Jordan", "abcd", "test", -5, "Pourri", "5.7", "L'ajout d'un commentaire dont la note n'est pas comprise entre 0 et 5 est accepté");
 		reviewItemFilmBadEntryTest(sn, "Jordan", "abcd", "test", 4, null, "5.8", "L'ajout d'un commentaire non instancié est accepté");
 		
-		reviewItemFilmOkTest (sn, "Jordan","abcd","test", 4, "Pourri", "5.9");
-
-		reviewItemFilmNotItemTest (sn, "Jordan","abcd","test2", 4, "Pourri", "5.10", "L'ajout d'un commentaire pour un film inexistant est accepté");
+		// Utilisation de reviewItemFilm avec en paramètre pseudo/mdp incorrects
+		reviewItemFilmNotMemberTest(sn, "George", "abcd","test2", 4, "Pourri", "5.9", "L'ajout d'un commentaire par un non membre est accepté");
+		reviewItemFilmNotMemberTest(sn, "Jordan", "efgh","test2", 4, "Pourri", "5.10", "L'ajout d'un commentaire avec mauvais login/pwd est accepté");
 		
-		reviewItemFilmNotMemberTest(sn, "George", "abcd","test2", 4, "Pourri", "5.11", "L'ajout d'un commentaire par un non membre est accepté");
-		reviewItemFilmNotMemberTest(sn, "Jordan", "efgh","test2", 4, "Pourri", "5.12", "L'ajout d'un commentaire avec mauvais login/pwd est accepté");
-
+		// Utilisation de reviewItemFilm avec en paramètre un film inexistant
+		reviewItemFilmNotItemTest (sn, "Jordan","abcd","test2", 4, "Pourri", "5.11", "L'ajout d'un commentaire pour un film inexistant est accepté");
+		
+		// Utilisation de reviewItemFilm avec paramètres d'entrée corrects et vérification de la mise à jour d'une review
+		reviewItemFilmOkTest (sn, "Jordan","abcd","test", 4, "Pourri", "5.12");
+		reviewItemFilmOkTest (sn, "Jordan","abcd","test", 8, "Bien", "5.13");
 	}
 }

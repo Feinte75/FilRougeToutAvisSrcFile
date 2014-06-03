@@ -92,6 +92,7 @@ public class TestsReviewItemBook {
 			System.out.println("Test reviewItemBook échoué : Exception non prevue : Revoir methodes dans le bloc try");
 		}
 		
+		// Utilisation de reviewItemFilm avec paramètres d'entrée incorrects
 		reviewItemBookBadEntryTest(sn, null, "abcd", "test", 4, "Pourri", "5.1", "L'ajout d'un commentaire par un membre dont le pseudo n'est pas instancié est accepté" );
 		reviewItemBookBadEntryTest(sn, " ",  "abcd", "test", 4, "Pourri", "5.2", "L'ajout d'un commentaire par un membre dont le pseudo n'est composé que d'espaces est accepté" );
 		reviewItemBookBadEntryTest(sn, "Jordan", null, "test", 4, "Pourri", "5.3", "L'ajout d'un commentaire par un membre dont le password n'est pas instancié est accepté" );
@@ -101,12 +102,15 @@ public class TestsReviewItemBook {
 		reviewItemBookBadEntryTest(sn, "Jordan", "abcd", "test", -5, "Pourri", "5.7", "L'ajout d'un commentaire dont la note n'est pas comprise entre 0 et 5 est accepté");
 		reviewItemBookBadEntryTest(sn, "Jordan", "abcd", "test", 4, null, "5.8", "L'ajout d'un commentaire non instancié est accepté");
 		
-		reviewItemBookOkTest (sn, "Jordan","abcd","test", 5, "Pourri", "5.9");
-
-		reviewItemBookNotItemTest (sn, "Jordan","abcd","test2", 4, "Pourri", "5.10", "L'ajout d'un commentaire pour un livre inexistant est accepté");
+		// Utilisation de reviewItemFilm avec en paramètre un film inexistant
+		reviewItemBookNotItemTest (sn, "Jordan","abcd","test2", 4, "Pourri", "5.9", "L'ajout d'un commentaire pour un livre inexistant est accepté");
 		
-		reviewItemBookNotMemberTest(sn, "George", "abcd","test2", 4, "Pourri", "5.11", "L'ajout d'un commentaire par un non membre est accepté");
-		reviewItemBookNotMemberTest(sn, "Jordan", "efgh","test2", 4, "Pourri", "5.12", "L'ajout d'un commentaire avec mauvais login/pwd est accepté");
-
+		// Utilisation de reviewItemFilm avec en paramètre pseudo/mdp incorrects
+		reviewItemBookNotMemberTest(sn, "George", "abcd","test2", 4, "Pourri", "5.10", "L'ajout d'un commentaire par un non membre est accepté");
+		reviewItemBookNotMemberTest(sn, "Jordan", "efgh","test2", 4, "Pourri", "5.11", "L'ajout d'un commentaire avec mauvais login/pwd est accepté");
+		
+		// Utilisation de reviewItemFilm avec paramètres d'entrée corrects et vérification de la mise à jour d'une review
+		reviewItemBookOkTest (sn, "Jordan","abcd","test", 5, "Pourri", "5.12");
+		reviewItemBookOkTest (sn, "Jordan","abcd","test", 8, "Bien", "5.13");
 	}
 }

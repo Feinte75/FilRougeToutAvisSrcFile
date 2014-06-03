@@ -118,6 +118,7 @@ public class TestsAddItemBook {
 			System.out.println("Test AddItemBook échoué : Exception non prevue : Revoir methodes dans le bloc try");
 		}
 		
+		// Utilisation de addItemBook avec paramètres d'entrée incorrects
 		addItemBookBadEntryTest(sn, null, "abcd", "test", "drame", "john", 120, "4.1", "L'ajout d'un livre par un membre dont le pseudo n'est pas instancié est accepté" );
 		addItemBookBadEntryTest(sn, " ", "abcd", "test", "drame", "john", 120, "4.2", "L'ajout d'un livre par un membre dont le pseudo n'est composé que d'espaces est accepté" );
 		addItemBookBadEntryTest(sn, "Jordan", null, "test", "drame", "john", 120, "4.3", "L'ajout d'un livre par un membre dont le password n'est pas instancié est accepté" );
@@ -128,20 +129,20 @@ public class TestsAddItemBook {
 		addItemBookBadEntryTest(sn, "Jordan", "abcd", "test", "drame", null, 120, "4.8", "L'ajout d'un livre dont l'auteur n'est pas instancié est accepté");
 		addItemBookBadEntryTest(sn, "Jordan", "abcd", "test4.9", "drame", "john", 0, "4.9", "L'ajout d'un livre de 0 pages est accepté");
 		
+		// Utilisation de addItemBook avec en paramètre un livre déjà existant
+		addItemBookAlreadyExistsTest(sn, "Jordan","abcd","test", "drame","john", 125, "4.10", "L'ajout d'un livre avec le titre du premier livre ajouté est accepté");
+		addItemBookAlreadyExistsTest(sn, "Alice", "cdef", "test3","humour", "john", 100, "4.11", "L'ajout d'un livre avec le titre du dernier livre ajouté est accepté");
+		addItemBookAlreadyExistsTest(sn, "Glenn", "bcde", "TEST2","action", "john", 90, "4.12", "L'ajout d'un livre avec le titre d'un livre existant (avec casse différente) est accepté");
+		addItemBookAlreadyExistsTest(sn, "Glenn", "bcde", "  test2  ","action", "john", 90, "4.13","L'ajout d'un livre avec le titre d'un livre existant (avec leadings et trailings blanks) est accepté");       
 		
-		addItemBookOKTest (sn, "Jordan","abcd","test", "drame","john", 125, "4.20");
-		addItemBookOKTest (sn, "Glenn", "bcde", "test2","action", "john", 90, "4.21");
-		addItemBookOKTest (sn, "Alice", "cdef", "test3","humour", "john", 100, "4.22");
-
-		// tentative d'ajout d'un livre "existant"
-
-		addItemBookAlreadyExistsTest(sn, "Jordan","abcd","test", "drame","john", 125, "4.23", "L'ajout d'un livre avec le titre du premier livre ajouté est accepté");
-		addItemBookAlreadyExistsTest(sn, "Alice", "cdef", "test3","humour", "john", 100, "4.24", "L'ajout d'un livre avec le titre du dernier livre ajouté est accepté");
-		addItemBookAlreadyExistsTest(sn, "Glenn", "bcde", "TEST2","action", "john", 90, "4.25", "L'ajout d'un livre avec le titre d'un livre existant (avec casse différente) est accepté");
-		addItemBookAlreadyExistsTest(sn, "Glenn", "bcde", "  test2  ","action", "john", 90, "4.26","L'ajout d'un livre avec le titre d'un livre existant (avec leadings et trailings blanks) est accepté");       
-
-		addItemBookNotMember(sn, "George", "abcd","test2", "drame","john", 125, "4.27", "L'ajout d'un livre par un non membre est accepté");
-		addItemBookNotMember(sn, "Jordan", "efgh","test2", "drame","john", 125, "4.28", "L'ajout d'un livre avec mauvais login/pwd est accepté");
+		// Utilisation de addItemBook avec en paramètre pseudo/mdp incorrects
+		addItemBookNotMember(sn, "George", "abcd","test2", "drame","john", 125, "4.14", "L'ajout d'un livre par un non membre est accepté");
+		addItemBookNotMember(sn, "Jordan", "efgh","test2", "drame","john", 125, "4.15", "L'ajout d'un livre avec mauvais login/pwd est accepté");
+		
+		// Utilisation de addItemBook avec paramètres d'entrée corrects
+		addItemBookOKTest (sn, "Jordan","abcd","test", "drame","john", 125, "4.16");
+		addItemBookOKTest (sn, "Glenn", "bcde", "test2","action", "john", 90, "4.17");
+		addItemBookOKTest (sn, "Alice", "cdef", "test3","humour", "john", 100, "4.18");
 		
 		if (nbMembres != sn.nbMembers()) {
 			System.out.println("Erreur 4.29 :  le nombre de membres après utilisation de addItemBooks a été modifié");

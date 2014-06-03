@@ -74,8 +74,7 @@ public class TestsAddMember {
 
 		// <=> fiche numéro 1
 
-		// tentative d'ajout de membres avec entrées "incorrectes"
-
+		// Utilisation de addMember avec param�tres d'entr�e incorrects
 		addMemberBadEntryTest ( sn, null, "qsdfgh", "", "3.1", "L'ajout d'un membre dont le pseudo n'est pas instancié est accepté");
 		addMemberBadEntryTest ( sn, " ", "qsdfgh", "", "3.2", "L'ajout d'un membre dont le pseudo ne contient pas un caracteres, autre que des espaces, est accepté");
 		addMemberBadEntryTest ( sn, "B", null, "", "3.3", "L'ajout d'un membre dont le password n'est pas instancié est accepté");
@@ -83,15 +82,13 @@ public class TestsAddMember {
 		addMemberBadEntryTest ( sn, "BBBB", "bbbb", null, "3.5", "L'ajout d'un membre dont le profil n'est pas instancié est accepté");
 		
 		// <=> fiche numéro 2
-
-		// ajout de 3 membres avec entrées "correctes"
-
+		
+		// Utilisation de addMember avec param�tres d'entr�e corrects
 		addMemberOKTest (sn, "Paul", "paul", "lecteur impulsif","3.6,1");
 		addMemberOKTest (sn, "Antoine", "antoine", "grand amoureux de la littérature","3.6,2");
 		addMemberOKTest (sn, "Alice", "alice", "20 ans, sexy","3.6,3");
 
-		// tentative d'ajout de membre "existant"
-
+		// Utilisation de addMember avec en param�tre un livre d�j� existant
 		addMemberAlreadyExistsTest(sn, "Paul", "dfsf", "", "3.7", "L'ajout d'un membre avec le pseudo du premier membre ajouté est accepté");
 		addMemberAlreadyExistsTest(sn, "Alice", "alice", "", "3.8", "L'ajout d'un membre avec le pseudo du dernier membre ajouté est accepté");
 		addMemberAlreadyExistsTest(sn, "anToine", "antoine", "", "3.9", "L'ajout d'un membre avec un pseudo existant (avec casse différente) est accepté");
