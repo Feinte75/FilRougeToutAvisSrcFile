@@ -95,7 +95,7 @@ public class TestsReviewOpinion {
 			nbTestOk++;
 		}
 		catch (Exception e){
-			System.out.println ("Test " + idTest + " : exception non prï¿½vue. " + e);
+			System.out.println ("Test " + idTest + " : exception non prévue. " + e);
 			e.printStackTrace();
 			nbTestFail++;
 		}
@@ -114,7 +114,9 @@ public class TestsReviewOpinion {
 			nbTestFail++;
 		}
 	}
-
+	
+	// Variable pour verifier le changement de note en fonction du karma
+	private static float newRating = 0;
 	public static void reviewOpinionOkTest(SocialNetwork sn, String pseudo, String password, String commentaryAuthor, String title, String commentary, float rating, String idTest, String messErreur){
 
 		// verifie que l'ajout d'une opinion (pseudo ,password, rating, string type, titre, pseudo) est refusée (levï¿½e de l'exception ou tout est OK et pas de modification du sn)
@@ -122,8 +124,13 @@ public class TestsReviewOpinion {
 		// sinon, affiche le message d'erreur passï¿½ en paramï¿½tre
 
 		try{
-			sn.reviewOpinionFilm(pseudo, password, commentaryAuthor, title, rating, commentary);
-			
+			newRating = sn.reviewOpinionFilm(pseudo, password, commentaryAuthor, title, rating, commentary);
+			// Les deux tests doivent porter le karma successivement à 3.666667 et à 3
+			// Si ces valeurs ne sont pas obtenus alors le calcul est mauvais
+			if(Math.abs(newRating-3.666666) < 0.000000001 && newRating != 3 ){
+				System.out.println ("Test " + idTest + " La note n'a pas été correctement modifiée " );
+				nbTestFail++;
+			}
 			nbTestOk++;
 		}
 		catch (Exception e) {
@@ -193,6 +200,7 @@ public class TestsReviewOpinion {
 		try {
 			sn.addMember("test", "1234", "bebe");
 			sn.addMember("inconnu", "1234", "baba");
+			sn.addMember("inconnu2", "1234", "bubu");
 		} catch (Exception e) {
 			
 			e.printStackTrace();
@@ -235,9 +243,13 @@ public class TestsReviewOpinion {
 		
 		//ajout d'une review film et livre
 		try{
-			// 2 reviews a 4
-			sn.reviewItemFilm("test", "1234", "Le seigneur des anneaux", 4, "Good");
-			sn.reviewItemBook("test", "1234", "Le seigneur des anneaux", 4, "Good");
+			// 2 reviews a 5
+			sn.reviewItemFilm("test", "1234", "Le seigneur des anneaux", 5, "Good");
+			sn.reviewItemBook("test", "1234", "Le seigneur des anneaux", 5, "Good");
+			
+			// 2 reviews a 3 par un autre membre
+			sn.reviewItemFilm("inconnu", "1234", "Le seigneur des anneaux", 3, "Bad");
+			sn.reviewItemBook("inconnu", "1234", "Le seigneur des anneaux", 3, "Bad");
 		
 		} catch (Exception e){
 			
@@ -249,10 +261,10 @@ public class TestsReviewOpinion {
 		nbMembres=sn.nbMembers();
 		nbLivres=sn.nbBooks();
 
-		// Utilisation de reviewOpinion avec paramètres d'entrée incorrects
 		// Test avec ajout d'une opinion sur un film et un book
-		reviewOpinionOkTest (sn, "inconnu","1234","test", "Le seigneur des anneaux", "D'accord", 4, "7.18", "L'ajout d'une opinion sur un film est OK");
-
+		reviewOpinionOkTest (sn, "inconnu","1234","test", "Le seigneur des anneaux", "D'accord", 0f, "7.18", "L'ajout d'une opinion sur un film et un livre ne fonctionne pas");
+		reviewOpinionOkTest(sn, "inconnu2",	"1234", "test", "Le seigneur des anneaux", "Pas d'accord", 0f, "7.19", "L'ajout d'une opinion ne modifie pas la note");
+		
 		if (nbMembres != sn.nbMembers()) {
 			System.out.println("Erreur 7.19 :  le nombre de membres apres utilisation de reviewOpinion a ete modifie");
 		}

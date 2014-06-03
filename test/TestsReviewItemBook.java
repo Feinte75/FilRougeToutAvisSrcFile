@@ -110,7 +110,7 @@ public class TestsReviewItemBook {
 		reviewItemBookNotMemberTest(sn, "Jordan", "efgh","test2", 4, "Pourri", "5.11", "L'ajout d'un commentaire avec mauvais login/pwd est accepté");
 		
 		// Utilisation de reviewItemFilm avec paramètres d'entrée corrects et vérification de la mise à jour d'une review
-		reviewItemBookOkTest (sn, "Jordan","abcd","test", 5, "Pourri", "5.12");
-		reviewItemBookOkTest (sn, "Jordan","abcd","test", 8, "Bien", "5.13");
+		reviewItemBookOkTest (sn, "Jordan","abcd","test", 4, "Pourri", "5.12");
+		reviewItemBookOkTest (sn, "Jordan","abcd","test", 5, "Bien", "5.13");
 	}
 }

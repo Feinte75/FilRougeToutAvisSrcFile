@@ -63,7 +63,7 @@ public class TestsAddMember {
 		int nbLivres = 0;
 		int nbFilms = 0;
 
-		System.out.println("Tests  ajouter des membres au rÃ©seau social  ");
+		System.out.println("Tests  ajouter des membres au réseau social  ");
 
 
 		SocialNetwork sn = new SocialNetwork();
@@ -72,7 +72,7 @@ public class TestsAddMember {
 		nbFilms = sn.nbFilms();
 		nbLivres = sn.nbBooks();
 
-		// <=> fiche numÃ©ro 1
+		// <=> fiche numéro 1
 
 		// Utilisation de addMember avec paramètres d'entrée incorrects
 		addMemberBadEntryTest ( sn, null, "qsdfgh", "", "3.1", "L'ajout d'un membre dont le pseudo n'est pas instanciÃ© est acceptÃ©");
@@ -81,7 +81,7 @@ public class TestsAddMember {
 		addMemberBadEntryTest ( sn, "B", "   qwd ", "", "3.4", "L'ajout d'un membre dont le password ne contient pas au moins 4 caracteres, autre que des espaces de dÃ©but ou de fin, est acceptÃ©");
 		addMemberBadEntryTest ( sn, "BBBB", "bbbb", null, "3.5", "L'ajout d'un membre dont le profil n'est pas instanciÃ© est acceptÃ©");
 		
-		// <=> fiche numÃ©ro 2
+		// <=> fiche numéro 2
 		
 		// Utilisation de addMember avec paramètres d'entrée corrects
 		addMemberOKTest (sn, "Paul", "paul", "lecteur impulsif","3.6,1");
