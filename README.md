@@ -12,7 +12,6 @@ Les fonctionnalités proposées sont :
 	
 Instructions d'installation
 
-La compilation du code source s'effectuera grâce à la commande javac. 
 Grace à un terminal, se placer sur le repertoire des sources
 Compiler chaques packages avec :
 javac ./avis/*.java
@@ -28,9 +27,10 @@ Une fois les classes compilées, il est possible de lancer une interface graphiq
 java ./avis.IHM
 
 Les tests se trouvent dans le packages test et peuvent être executés indépendamment :
-java ./test.TestsAddMember
+java ./test.TestsAddMember par exemple
 
 ou bien en executant la classe TestSocialNetwork, tout les tests seront executés les uns à la suite des autres avec un bilan à la fin :
 java ./test.TestSocialNetwork
 
 Il est possible de générer la javadoc en tapant la commande :
+javadoc -d repertoire *.java
