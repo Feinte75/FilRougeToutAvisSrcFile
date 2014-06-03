@@ -16,7 +16,7 @@ public class TestsReviewOpinion {
 
 	public static void reviewOpinionBadEntryTest(SocialNetwork sn, String pseudo, String password, String commentaryAuthor, String title, String commentary, float rating, String idTest, String messErreur){
 
-		// verifie la levee de l'exception BadEntry 
+		// verifie la levee de l'exception NotMember
 		// si la levee est effective, incremente la variable nbsuccess
 		// sinon, affiche un message d'erreur 
 

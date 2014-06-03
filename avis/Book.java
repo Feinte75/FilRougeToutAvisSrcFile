@@ -3,7 +3,6 @@ package avis;
 public class Book extends Item {
 
 	private String author;
-	
 	private int nbPages;
 	
 	/**
