@@ -197,7 +197,7 @@ public class SocialNetwork {
 	 *  <li>  If the title is not instantiated or has fewer than a character (other than spaces).  </li>
 	 *  <li>  If the type is not instantiated. </li>
 	 *  <li>  If the author is not instantiated. </li>
-	 *  <li>  If the number of pages is not posivite.  </li>
+	 *  <li>  If the number of pages is not positive.  </li>
 	 * </ul><br>       
 	 * @throws NotMember : If the pseudo doesn't belong to a member or if the pseudo and the password don't match.
 	 * @throws ItemBookAlreadyExists : Film's title already exists (same title : case-insensitive,  leadings and trailings blanks insensitive)
@@ -245,7 +245,7 @@ public class SocialNetwork {
 	 * @throws NotMember : If the pseudo doesn't belong to a member or if the pseudo and the password don't match.
 	 * @throws NotItem : If the title is not the title of a film.
 	 * 
-	 * @return The average rate of the rates on this film
+	 * @return The average of the rating on this film
 	 */
 	public float reviewItemFilm(String pseudo, String password, String title, float rating, String commentary) throws BadEntry, NotMember, NotItem {
 		
@@ -290,7 +290,7 @@ public class SocialNetwork {
 	 * @throws NotMember : If the pseudo doesn't belong to a member or if the pseudo and the password don't match.
 	 * @throws NotItem : If the title is not the title of a book.
 	 * 
-	 * @return The average rate of the rates on this book
+	 * @return The average of the rating on this book
 	 */
 	
 	public float reviewItemBook(String pseudo, String password, String title, float rating, String commentary) throws BadEntry, NotMember, NotItem {
@@ -333,6 +333,8 @@ public class SocialNetwork {
 	 * </ul>
 	 * @throws NotItem
 	 * @throws NotReview when the review doesn't exists
+	 * 
+	 * @return the item average rating taking into account the new karma 
 	 */
 	public float reviewOpinionBook(String pseudo, String password, String reviewAuthorPseudo, String title, float rating, String commentary) throws BadEntry, NotMember, NotItem, NotReview{
 		
@@ -389,6 +391,8 @@ public class SocialNetwork {
 	 * </ul>
 	 * @throws NotItem
 	 * @throws NotReview when the review doesn't exists
+	 * 
+	 * @return the item average rating taking into account the new karma 
 	 */
 	public float reviewOpinionFilm(String pseudo, String password, String reviewAuthorPseudo, String title, float rating, String commentary) throws BadEntry, NotMember, NotItem, NotReview{
 		
@@ -504,13 +508,17 @@ public class SocialNetwork {
 	 * @param profile The member profile
 	 * @return boolean True when the profile is not instantiated or of 0 characters, false either
 	 */
-	
 	private boolean badProfileEntry(String profile){
 
 		if(profile == null) return true;
 		else return false;
 	}
 	
+	/**
+	 * 
+	 * @param title
+	 * @return
+	 */
 	private boolean badTitleEntry(String title){
 		
 		if(title == null)return true;
@@ -519,36 +527,66 @@ public class SocialNetwork {
 		else return false;
 	}
 	
+	/**
+	 * 
+	 * @param filmMaker
+	 * @return
+	 */
 	private boolean badFilmMakerEntry(String filmMaker){
 
 		if(filmMaker == null) return true;
 		else return false;
 	}
 	
+	/**
+	 * 
+	 * @param scriptWriter
+	 * @return
+	 */
 	private boolean badScriptWriterEntry(String scriptWriter){
 		
 		if(scriptWriter == null) return true;
 		else return false;
 	}
 	
+	/**
+	 * 
+	 * @param author
+	 * @return
+	 */
 	private boolean badAuthorEntry(String author){
 		
 		if(author == null) return true;
 		else return false;
 	}
 	
+	/**
+	 * 
+	 * @param genre
+	 * @return
+	 */
 	private boolean badGenreEntry(String genre){
 
 		if(genre == null) return true;
 		else return false;
 	}
 	
+	/**
+	 * 
+	 * @param commentary
+	 * @return
+	 */
 	private boolean badCommentaryEntry(String commentary){
 		
 		if(commentary == null)return true;
 		else return false;
 	}
 
+	/**
+	 * 
+	 * @param rating
+	 * @return
+	 */
 	private boolean badRatingEntry(float rating){
 		
 		if(rating < 0 || rating > 5) return true;
