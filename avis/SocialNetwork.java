@@ -14,32 +14,28 @@ import exception.NotReview;
  * @author A. Beugnard, 
  * @author G. Ouvradou
  * @author B. Prou
- * @date février - mars 2011
- * @version V0.6
+ * @author G. Feunteun
+ * @author J. Bili-Prodhomme
+ * @date mai - juin 2014 
+ * @version V 1.0
  */
 
 
 /** 
  * <p>
- * <b>Système de mutualisation d'opinions portant sur des domaines
- * variés (littérature, cinéma, art, gastronomie, etc.) et non limités.</b>
+ * <b> Opinions mutualisation system about cinema and literature.  </b>
  * </p>
  * <p>
- * L'accès aux items et aux opinions qui leurs sont associées
- * est public. La création d'item et le dépôt d'opinion nécessite en revanche 
- * que l'utilisateur crée son profil au préalable.
+ * <b> Items and opinions consultation is free for all. Item creation and 
+ * the ability to give opinions are restricted to members only </b>
  * </p>
  * <p>
- * Lorsqu'une méthode peut lever deux types d'exception, et que les conditions sont réunies 
- * pour lever l'une et l'autre, rien ne permet de dire laquelle des deux sera effectivement levée.
+ * <b> Registration recquires a pseudo, a password and a sentence describing the member </b>
  * </p>
  * <p>
- * Dans une version avancée (version 2), une opinion peut également
- * être évaluée. Chaque membre se voit dans cette version décerner un "karma" qui mesure
- * la moyenne des notes portant sur les opinions qu'il a émises.
- * L'impact des opinions entrant dans le calcul de la note moyenne attribuée à un item
- * est pondéré par le karma des membres qui les émettent.
- * </p>
+ * <b> The system is in version 1.0 and includes a karma system allowing members to rate each others reviews
+ * leading to a smoother item rating. </b>
+ * </p> 
  */
 
 public class SocialNetwork {
@@ -51,12 +47,12 @@ public class SocialNetwork {
 	private LinkedList<Item> items;
 	
 	/**
-	 * constructeur de <i>SocialNetwok</i> 
+	 * constructor of <i>SocialNetwok</i> 
 	 * 
 	 */
 
 	/**
-	 * Constructeur
+	 * Constructor
 	 */
 	public SocialNetwork() {
 		
@@ -126,6 +122,7 @@ public class SocialNetwork {
 	 */
 	public void addMember(String pseudo, String password, String profile) throws BadEntry, MemberAlreadyExists  {
 		
+		// Bad entry exception checking
 		if(badPseudoEntry(pseudo)) throw new BadEntry("Bad pseudo entry");
 		if(badPasswordEntry(password)) throw new BadEntry("Bad password entry");
 		if(badProfileEntry(profile)) throw new BadEntry("Bad profile entry");
@@ -151,8 +148,8 @@ public class SocialNetwork {
 	 * 
 	 * @throws BadEntry :
 	 * <ul>
-	 *  <li>  si le pseudo n'est pas instancié ou a moins de 1 caractère autre que des espaces .  </li>
-	 *  <li>  si le password n'est pas instancié ou a moins de 4 caractères autres que des leadings or trailing blanks. </li>
+	 *  <li>  If the pseudo is not instanciated of less than 1 character.  </li>
+	 *  <li>  If the password is not instanciated or of less than 4 characters excluding leadings or trailing blanks. </li>
 	 *  <li>  si le titre n'est pas instancié ou a moins de 1 caractère autre que des espaces.  </li>
 	 *  <li>  si le genre n'est pas instancié. </li>
 	 *  <li>  si le réalisateur n'est pas instancié. </li>
@@ -165,13 +162,14 @@ public class SocialNetwork {
 	 */
 	public void addItemFilm(String pseudo, String password, String title, String genre, String filmMaker, String scriptWriter, int length) throws BadEntry, NotMember, ItemFilmAlreadyExists {
 
+		// Bad entry exception checking
 		if(badPseudoEntry(pseudo)) throw new BadEntry("Bad pseudo entry");
 		if(badPasswordEntry(password)) throw new BadEntry("Bad password entry");
-		if (badTitleEntry(title)) throw new BadEntry("");
-		if (badGenreEntry(genre)) throw new BadEntry("");
-		if (badFilmMakerEntry(filmMaker)) throw new BadEntry("");
-		if (badScriptWriterEntry(scriptWriter)) throw new BadEntry("");
-		if (length <= 0) throw new BadEntry("");
+		if (badTitleEntry(title)) throw new BadEntry("Bad title entry");
+		if (badGenreEntry(genre)) throw new BadEntry("Bad genre entry");
+		if (badFilmMakerEntry(filmMaker)) throw new BadEntry("Bad film maker entry");
+		if (badScriptWriterEntry(scriptWriter)) throw new BadEntry("Bad script writer entry");
+		if (length <= 0) throw new BadEntry("Bad length entry");
 		
 		Member member = authenticate(pseudo, password);
 		if (member == null) throw new NotMember("");
@@ -195,7 +193,7 @@ public class SocialNetwork {
 	 * @throws BadEntry :
 	 * <ul>
 	 *  <li>  si le pseudo n'est pas instancié ou a moins de 1 caractère autre que des espaces .  </li>
-	 *  <li>  si le password n'est pas instancié ou a moins de 4 caractères autres que des leadings or trailing blanks. </li>
+	 *  <li>  If the password is not instanciated or of less than 4 characters excluding leadings or trailing blanks. </li>
 	 *  <li>  si le titre n'est pas instancié ou a moins de 1 caractère autre que des espaces.  </li>
 	 *  <li>  si le genre n'est pas instancié. </li>
 	 *  <li>  si l'auteur n'est pas instancié. </li>
@@ -208,12 +206,13 @@ public class SocialNetwork {
 	 */
 	public void addItemBook(String pseudo, String password, String title, String genre, String author, int nbPages) throws  BadEntry, NotMember, ItemBookAlreadyExists{
 
+		// Bad entry exception checking
 		if(badPseudoEntry(pseudo)) throw new BadEntry("Bad pseudo entry");
 		if(badPasswordEntry(password)) throw new BadEntry("Bad password entry");
-		if (badTitleEntry(title)) throw new BadEntry("");
-		if (badGenreEntry(genre)) throw new BadEntry("");
+		if (badTitleEntry(title)) throw new BadEntry("Bad title entry");
+		if (badGenreEntry(genre)) throw new BadEntry("Bad genre entry");
 		if (badAuthorEntry(author)) throw new BadEntry("");
-		if (nbPages <= 0) throw new BadEntry("");
+		if (nbPages <= 0) throw new BadEntry("Bad nbPages entry");
 		
 		Member member = authenticate(pseudo, password);
 		if (member == null) throw new NotMember("");
@@ -223,37 +222,6 @@ public class SocialNetwork {
 		
 		items.add(new Book(title, genre, author, nbPages));
 	}
-
-	/**
-	 * Consulter les items du <i>SocialNetwork</i> par nom
-	 * 
-	 * @param nom son nom (eg. titre d'un film, d'un livre, etc.)
-	 * 
-	 * @throws BadEntry : si le nom n'est pas instancié ou a moins de 1 caractère autre que des espaces.  </li>
-	 * 
-	 * @return LinkedList <String> : la liste des représentations de tous les items ayant ce nom 
-	 * Cette représentation contiendra la note de l'item s'il a été noté.
-	 * (une liste vide si aucun item ne correspond) 
-	 */
-	public LinkedList <String> consultItems(String title) throws BadEntry {
-		
-		LinkedList<String> ll = new LinkedList<String>();
-		
-		if(badTitleEntry(title)) throw new BadEntry("");
-		
-		Item item = findItemBook(title);
-		if(item != null){
-			ll.add(item.toString());
-		}
-		
-		item = findItemFilm(title);
-		if(item != null){
-			ll.add(item.toString());
-		}
-		
-		return ll;
-	}
-
 
 	/**
 	 * Donner son opinion sur un item film.
@@ -269,7 +237,7 @@ public class SocialNetwork {
 	 * @throws BadEntry :
 	 * <ul>
 	 *  <li>  si le pseudo n'est pas instancié ou a moins de 1 caractère autre que des espaces .  </li>
-	 *  <li>  si le password n'est pas instancié ou a moins de 4 caractères autres que des leadings or trailing blanks. </li>
+	 *  <li>  If the password is not instanciated or of less than 4 characters excluding leadings or trailing blanks. </li>
 	 *  <li>  si le titre n'est pas instancié ou a moins de 1 caractère autre que des espaces.  </li>
 	 *  <li>  si la note n'est pas comprise entre 0.0 et 5.0. </li>
 	 *  <li>  si le commentaire n'est pas instancié. </li>
@@ -281,11 +249,12 @@ public class SocialNetwork {
 	 */
 	public float reviewItemFilm(String pseudo, String password, String title, float rating, String commentary) throws BadEntry, NotMember, NotItem {
 		
+		// Bad entry exception checking
 		if(badPseudoEntry(pseudo)) throw new BadEntry("Bad pseudo entry");
 		if(badPasswordEntry(password)) throw new BadEntry("Bad password entry");
-		if (badTitleEntry(title)) throw new BadEntry("");
-		if (badCommentaryEntry(commentary)) throw new BadEntry("");
-		if (badRatingEntry(rating)) throw new BadEntry("");
+		if (badTitleEntry(title)) throw new BadEntry("Bad title entry");
+		if (badCommentaryEntry(commentary)) throw new BadEntry("Bad commentary entry");
+		if (badRatingEntry(rating)) throw new BadEntry("Bad rating entry");
 		
 		Member member = authenticate(pseudo, password);
 		if (member == null) throw new NotMember("");
@@ -313,7 +282,7 @@ public class SocialNetwork {
 	 * @throws BadEntry :
 	 * <ul>
 	 *  <li>  si le pseudo n'est pas instancié ou a moins de 1 caractère autre que des espaces .  </li>
-	 *  <li>  si le password n'est pas instancié ou a moins de 4 caractères autres que des leadings or trailing blanks. </li>
+	 *  <li>  If the password is not instanciated or of less than 4 characters excluding leadings or trailing blanks. </li>
 	 *  <li>  si le titre n'est pas instancié ou a moins de 1 caractère autre que des espaces.  </li>
 	 *  <li>  si la note n'est pas comprise entre 0.0 et 5.0. </li>
 	 *  <li>  si le commentaire n'est pas instancié. </li>
@@ -326,11 +295,12 @@ public class SocialNetwork {
 	
 	public float reviewItemBook(String pseudo, String password, String title, float rating, String commentary) throws BadEntry, NotMember, NotItem {
 		
+		// Bad entry exception checking
 		if(badPseudoEntry(pseudo)) throw new BadEntry("Bad pseudo entry");
 		if(badPasswordEntry(password)) throw new BadEntry("Bad password entry");
-		if (badTitleEntry(title)) throw new BadEntry("");
-		if (badCommentaryEntry(commentary)) throw new BadEntry("");
-		if (badRatingEntry(rating)) throw new BadEntry("");
+		if (badTitleEntry(title)) throw new BadEntry("Bad title entry");
+		if (badCommentaryEntry(commentary)) throw new BadEntry("Bad commentary entry");
+		if (badRatingEntry(rating)) throw new BadEntry("Bad rating entry");
 		
 		Member member = authenticate(pseudo, password);
 		if (member == null) throw new NotMember("");
@@ -350,7 +320,7 @@ public class SocialNetwork {
 	 * 
 	 * @param pseudo Opinion's author pseudo
 	 * @param password Opinion's author password
-	 * @param commentaryAuthor Pseudo of the author of the review which will be commented
+	 * @param reviewAuthorPseudo Pseudo of the author of the review which will be commented
 	 * @param title title of the book
 	 * @param rating 
 	 * @param commentary
@@ -364,23 +334,25 @@ public class SocialNetwork {
 	 * @throws NotItem
 	 * @throws NotReview when the review doesn't exists
 	 */
-	public float reviewOpinionBook(String pseudo, String password, String commentaryAuthor, String title, float rating, String commentary) throws BadEntry, NotMember, NotItem, NotReview{
+	public float reviewOpinionBook(String pseudo, String password, String reviewAuthorPseudo, String title, float rating, String commentary) throws BadEntry, NotMember, NotItem, NotReview{
 		
+		// Bad entry exception checking
 		if(badPseudoEntry(pseudo)) throw new BadEntry("Bad pseudo entry");
 		if(badPasswordEntry(password)) throw new BadEntry("Bad password entry");
-		if (badPseudoEntry(commentaryAuthor)) throw new BadEntry("");
-		if (badTitleEntry(title)) throw new BadEntry("");
-		if (badCommentaryEntry(commentary)) throw new BadEntry("");
-		if (badRatingEntry(rating)) throw new BadEntry("");
+		if (badPseudoEntry(reviewAuthorPseudo)) throw new BadEntry("Bad review author pseudo entry");
+		if (badTitleEntry(title)) throw new BadEntry("Bad title entry");
+		if (badCommentaryEntry(commentary)) throw new BadEntry("Bad commentary entry");
+		if (badRatingEntry(rating)) throw new BadEntry("Bad rating entry");
 		
 		// Authenticate the author of the opinion about the review
 		Member member = authenticate(pseudo, password);
 		if (member == null) throw new NotMember("Member");
 		
 		// Find the author of the review
-		Member memberCriticated = userExists(commentaryAuthor);
+		Member memberCriticated = userExists(reviewAuthorPseudo);
 		if (memberCriticated == null) throw new NotMember("Commentary Author");
 		
+		// Check if the author of the review tries to review himself
 		if(member == memberCriticated) throw new NotReview("Can't give an opinion about your own reviews");
 		
 		// Find the item book
@@ -398,13 +370,13 @@ public class SocialNetwork {
 	}
 
 	/**
-	 * Allow users to add opinions over members reviews. This opinions ratings influences the weight of the author of the review during
+	 * Allow users to add opinions over member reviews. This opinions ratings influences the weight of the author of the review during
 	 * the computation of the item's average rating. If a review has no opinions, it is considered as trustfull (karma = 1). The karma of a member
 	 * is defined by an average of all the opinions overs the member's review and is between 0 and 1.
 	 * 
 	 * @param pseudo Opinion's author pseudo
 	 * @param password Opinion's author password
-	 * @param commentaryAuthor Pseudo of the author of the review which will be commented
+	 * @param reviewAuthorPseudo Pseudo of the author of the review which will be commented
 	 * @param title title of the Film
 	 * @param rating 
 	 * @param commentary
@@ -418,21 +390,22 @@ public class SocialNetwork {
 	 * @throws NotItem
 	 * @throws NotReview when the review doesn't exists
 	 */
-	public float reviewOpinionFilm(String pseudo, String password, String commentaryAuthor, String title, float rating, String commentary) throws BadEntry, NotMember, NotItem, NotReview{
+	public float reviewOpinionFilm(String pseudo, String password, String reviewAuthorPseudo, String title, float rating, String commentary) throws BadEntry, NotMember, NotItem, NotReview{
 		
+		// Bad entry exception checking
 		if(badPseudoEntry(pseudo)) throw new BadEntry("Bad pseudo entry");
 		if(badPasswordEntry(password)) throw new BadEntry("Bad password entry");
-		if (badPseudoEntry(commentaryAuthor)) throw new BadEntry("");
-		if (badTitleEntry(title)) throw new BadEntry("");
-		if (badCommentaryEntry(commentary)) throw new BadEntry("");
-		if (badRatingEntry(rating)) throw new BadEntry("");
+		if (badPseudoEntry(reviewAuthorPseudo)) throw new BadEntry("Bad review author pseudo entry");
+		if (badTitleEntry(title)) throw new BadEntry("Bad title entry");
+		if (badCommentaryEntry(commentary)) throw new BadEntry("Bad commentary entry");
+		if (badRatingEntry(rating)) throw new BadEntry("Bad rating entry");
 		
 		// Authenticate the author of the opinion about the review
 		Member member = authenticate(pseudo, password);
 		if (member == null) throw new NotMember("Member");
 		
 		// Find the author of the review
-		Member memberCriticated = userExists(commentaryAuthor);
+		Member memberCriticated = userExists(reviewAuthorPseudo);
 		if (memberCriticated == null) throw new NotMember("Commentary Author");
 		
 		if(member == memberCriticated) throw new NotReview("Can't give an opinion about your own reviews");
@@ -452,30 +425,59 @@ public class SocialNetwork {
 	}
 	
 	/**
-	 * Obtenir une représentation textuelle du <i>SocialNetwork</i>.
+	 * Gives a textual representation of the <i>SocialNetwork</i>.
 	 * 
-	 * @return la chaîne de caractères représentation textuelle du <i>SocialNetwork</i> 
+	 * @return A String with every members and items included <i>SocialNetwork</i> 
 	 */
 	public String toString() {
 		
 		String rpz = "";
 		
 		for(Member m : members){
-			rpz += m;
+			rpz += m + "\n";
 		}
 		
 		for(Item m : items){
-			rpz += m;
+			rpz += m + "\n";
 		}
 		return rpz;
 	}
 
 	/**
+	 * Consult <i>SocialNetwork</i> items by name
+	 * 
+	 * @param title : The title of the item (Film, Book)
+	 * 
+	 * @throws BadEntry : si le nom n'est pas instancié ou a moins de 1 caractère autre que des espaces.  </li>
+	 * 
+	 * @return LinkedList <String> :  A list with every representations of the items with the same title
+	 * The representation includes the rating.
+	 * The list is empty if no items were found
+	 */
+	public LinkedList <String> consultItems(String title) throws BadEntry {
+		
+		LinkedList<String> ll = new LinkedList<String>();
+		
+		if(badTitleEntry(title)) throw new BadEntry("");
+		
+		Item item = findItemBook(title);
+		if(item != null){
+			ll.add(item.toString());
+		}
+		
+		item = findItemFilm(title);
+		if(item != null){
+			ll.add(item.toString());
+		}
+		
+		return ll;
+	}
+	
+	/**
 	 * Check if the pseudo has been instanciated and insure that it is more than 1 character length
 	 * @param pseudo Member's pseudo
 	 * @return boolean True when the pseudo is not instanciated or of less than 1 character, false either
 	 */
-	
 	private boolean badPseudoEntry(String pseudo){
 		
 		if(pseudo == null)return true;
@@ -489,7 +491,6 @@ public class SocialNetwork {
 	 * @param password
 	 * @return boolean True when the password is not instanciated or of less than 4 characters, false either
 	 */
-	
 	private boolean badPasswordEntry(String password){
 		
 		if(password == null)return true;
@@ -576,7 +577,7 @@ public class SocialNetwork {
 	}
 	
 	/**
-	 * Look for a pseudo in the members Linked List
+	 * Look for a pseudo in the member's Linked List
 	 * @param pseudo the pseudo to find in the linked list
 	 * @return Member The member with the pseudo or null if not found
 	 */
@@ -631,9 +632,7 @@ public class SocialNetwork {
 		return itemFound;
 	}
 	
-	// Tests unitaires
+	
 	public static void main(String[] args){
-		SocialNetwork sn = new SocialNetwork();
-		//ok
 	}
 }

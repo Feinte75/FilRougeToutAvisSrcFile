@@ -26,7 +26,7 @@ public class Film extends Item {
 	
 	public String toString(){
 		
-		return "Film :" +title+ " genre :" +genre+ " film maker :" +filmMaker+ " script writer :" +scriptWriter+ " length :" +length+ " average rating :" +average();
+		return "Film : " +title+ " genre : " +genre+ " film maker : " +filmMaker+ " script writer : " +scriptWriter+ " length : " +length+ " average rating : " +average();
 	}
 	
 	public static void main(String[] main){

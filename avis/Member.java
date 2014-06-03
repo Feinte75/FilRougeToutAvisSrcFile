@@ -104,8 +104,11 @@ public class Member {
 		return null;
 	}
 	
+	/**
+	 * @return The String representation of the member without his password for privacy reasons.
+	 */
 	public String toString(){
-		return "My pseudo is :" +pseudo+ " my password is :" +password+ " and my profile is :" +profile;
+		return "My pseudo is : " +pseudo+ " and my profile is : " +profile;
 	}
 	
 	public static void main(String[] args){
